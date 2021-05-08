@@ -18,19 +18,19 @@ In version 0.7, I redefined the HTML redactor material, because I don't know how
 Url: https://www.nexusmods.com/fallout4/mods/3635  
 Unzip the contents of the archive to the <root game>/Tools/MaterialEditor/ folder.
 
-Generate .lip files supported. Record file .wav using CK or Audacity.
+Generate .lip files supported. Record file .wav using CK or Audacity. 
 As soon as.the wav file will be loaded, you need to select it from the list and click the generate button. 
-If successful, the file will be where .wav is, but it will load only after opening the dialog again.
+If successful, the file will be where .wav is, but it will load only after opening the dialog again. 
 It still uses CK32 and it should be installed.
 
 # Installation
 After compiling the code, dynamic libraries are created: *tbb.dll*, *tbbmalloc.dll*, *winhttp.dll*.  
-(Optional *CreationKitUnicodePlugin.dll* to compile, use **Lazarus 1.8.2 and higher**)  
+(Optional *CreationKitUnicodePlugin.dll* to compile, use **Lazarus 1.8.2 and higher**) 
 All this should be in the root directory of the game.
 
 # Mod Settings
-To hide errors, create a file *CreationKitWarnings.txt*.  
-**IMPORTANT**: Errors should be copied from the mod's Log window and one error is one line.  
+To hide errors, create a file *CreationKitWarnings.txt*. 
+**IMPORTANT**: Errors should be copied from the mod's Log window and one error is one line. 
 Additionally, you can create a Localize folder and place a file with the same name, but with a different encoding.  
 The file must be in **ANSI** encoding.  
 *fallout4_test.ini* the main file with the settings and comes with the code, be sure to read.
