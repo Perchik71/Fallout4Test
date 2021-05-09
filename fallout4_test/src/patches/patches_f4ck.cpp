@@ -473,7 +473,7 @@ VOID FIXAPI MainFix_PatchFallout4CreationKit(VOID)
 		LPSTR lpArg = strtok(lpCmdLineStr, "\"");
 		while (lpArg != NULL) {
 			nCountArgCmdLine++;
-			lpArg = strtok(NULL, " ");
+			lpArg = strtok(NULL, "\"");
 		}
 	}
 	else
@@ -491,10 +491,6 @@ VOID FIXAPI MainFix_PatchFallout4CreationKit(VOID)
 		MessageBoxA(NULL, message, "Version Check", MB_ICONERROR);
 		return;
 	}
-
-	// run with cmd line (skip fixes)
-//	if (nCountArgCmdLine > 1)
-//		return;
 
 	//
 	// Replace broken crash dump functionality
