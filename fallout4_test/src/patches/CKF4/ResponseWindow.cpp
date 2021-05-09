@@ -9,8 +9,6 @@ namespace fs = std::filesystem;
 
 namespace ResponseWindow
 {
-	//BOOL& enableLipGeneration = *(BOOL*)OFFSET(0x455E2C8, 0);
-
 	static BOOL EnableLipGeneration = TRUE;
 	Classes::CUICustomWindow ResponseWindow;
 	Classes::CUIBaseControl ListViewItems;
@@ -72,7 +70,6 @@ namespace ResponseWindow
 						// only .wav
 
 						std::wstring wcAudioFilePath = XUtil::Conversion::AnsiToWide(AudioFilePath);
-						std::wstring wcInputText = XUtil::Conversion::AnsiToWide(InputText);
 						auto pathAudioFile = fs::path(wcAudioFilePath);
 						
 						// You can often find and .xwm.

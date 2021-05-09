@@ -40,6 +40,7 @@ VOID FIXAPI Fix_GenerateCrashdumps(VOID);
 
 namespace Classes = Core::Classes::UI;
 
+static INT32 nCountArgCmdLine = 0;
 
 /*
 ==================
@@ -109,23 +110,27 @@ VOID FIXAPI F_RequiredPatches(VOID)
 	// Fixes sky and fog
 	PatchSky();
 
-	//
-	// Processing messages during file upload so that the window doesn't hang
-	//
+	// no support cmd line
+	if (nCountArgCmdLine == 1)
+	{
+		//
+		// Processing messages during file upload so that the window doesn't hang
+		//
 
-	// jump to function for useful work (messages pool)
-	XUtil::DetourClassJump(OFFSET(0x2485C46, 0), &Classes::CUIMainWindow::ProcessMessages);
-	XUtil::DetourClassJump(OFFSET(0x2485E46, 0), &Classes::CUIMainWindow::ProcessMessages);
-	XUtil::DetourClassJump(OFFSET(0xDF2FBA, 0), &Classes::CUIMainWindow::ProcessMessages);
-	XUtil::DetourClassJump(OFFSET(0x8531BD, 0), &Classes::CUIMainWindow::ProcessMessages);
-	XUtil::DetourClassJump(OFFSET(0x262D1A7, 0), &Classes::CUIMainWindow::ProcessMessages);
-	// Replacing Sleep(1) on (messages pool)
-	XUtil::DetourClassCall(OFFSET(0x247EF69, 0), &Classes::CUIMainWindow::ProcessMessages);
-	XUtil::DetourClassCall(OFFSET(0x5DD8C2, 0), &Classes::CUIMainWindow::ProcessMessages);
-	XUtil::DetourClassCall(OFFSET(0x5DD7F2, 0), &Classes::CUIMainWindow::ProcessMessages);
-	// Replacing a completely empty function with something useful (messages pool)
-	XUtil::DetourClassCall(OFFSET(0x7E34D2, 0), &Classes::CUIMainWindow::ProcessMessages);
-	XUtil::DetourClassCall(OFFSET(0x773DEE, 0), &Classes::CUIMainWindow::ProcessMessages);
+		// jump to function for useful work (messages pool)
+		XUtil::DetourClassJump(OFFSET(0x2485C46, 0), &Classes::CUIMainWindow::ProcessMessages);
+		XUtil::DetourClassJump(OFFSET(0x2485E46, 0), &Classes::CUIMainWindow::ProcessMessages);
+		XUtil::DetourClassJump(OFFSET(0xDF2FBA, 0), &Classes::CUIMainWindow::ProcessMessages);
+		XUtil::DetourClassJump(OFFSET(0x8531BD, 0), &Classes::CUIMainWindow::ProcessMessages);
+		XUtil::DetourClassJump(OFFSET(0x262D1A7, 0), &Classes::CUIMainWindow::ProcessMessages);
+		// Replacing Sleep(1) on (messages pool)
+		XUtil::DetourClassCall(OFFSET(0x247EF69, 0), &Classes::CUIMainWindow::ProcessMessages);
+		XUtil::DetourClassCall(OFFSET(0x5DD8C2, 0), &Classes::CUIMainWindow::ProcessMessages);
+		XUtil::DetourClassCall(OFFSET(0x5DD7F2, 0), &Classes::CUIMainWindow::ProcessMessages);
+		// Replacing a completely empty function with something useful (messages pool)
+		XUtil::DetourClassCall(OFFSET(0x7E34D2, 0), &Classes::CUIMainWindow::ProcessMessages);
+		XUtil::DetourClassCall(OFFSET(0x773DEE, 0), &Classes::CUIMainWindow::ProcessMessages);
+	}
 
 	//
 	// Kill broken destructors causing crashes on exit
@@ -252,10 +257,10 @@ VOID FIXAPI F_UIPatches(VOID)
 		// Setting the colors
 		UITheme::Initialize((UITheme::Theme::Theme)theme_id);
 
-		Detours::IATHook(comDll, "USER32.dll", "GetSysColor", (uintptr_t)& UITheme::Comctl32GetSysColor);
-		Detours::IATHook(comDll, "USER32.dll", "GetSysColorBrush", (uintptr_t)& UITheme::Comctl32GetSysColorBrush);
-		Detours::IATDelayedHook(comDll, "UxTheme.dll", "DrawThemeBackground", (uintptr_t)& UITheme::Comctl32DrawThemeBackground);
-		Detours::IATDelayedHook(comDll, "UxTheme.dll", "DrawThemeText", (uintptr_t)& UITheme::Comctl32DrawThemeText);
+		Detours::IATHook(comDll, "USER32.dll", "GetSysColor", (uintptr_t)&UITheme::Comctl32GetSysColor);
+		Detours::IATHook(comDll, "USER32.dll", "GetSysColorBrush", (uintptr_t)&UITheme::Comctl32GetSysColorBrush);
+		Detours::IATDelayedHook(comDll, "UxTheme.dll", "DrawThemeBackground", (uintptr_t)&UITheme::Comctl32DrawThemeBackground);
+		Detours::IATDelayedHook(comDll, "UxTheme.dll", "DrawThemeText", (uintptr_t)&UITheme::Comctl32DrawThemeText);
 
 		// replace main toolbar
 		XUtil::DetourCall(OFFSET(0x5FE166, 0), UITheme::Comctl32CreateToolbarEx_1);
@@ -268,17 +273,17 @@ VOID FIXAPI F_UIPatches(VOID)
 
 	EditorUI::Initialize();
 
-	*(uintptr_t*)& MainWindow::OldWndProc = Detours::X64::DetourFunctionClass(OFFSET(0x05B74D0, 0), &MainWindow::WndProc);
-	*(uintptr_t*)& ObjectWindow::OldDlgProc = Detours::X64::DetourFunctionClass(OFFSET(0x03F9020, 0), &ObjectWindow::DlgProc);
-	*(uintptr_t*)& CellViewWindow::OldDlgProc = Detours::X64::DetourFunctionClass(OFFSET(0x059D820, 0), &CellViewWindow::DlgProc);
-	*(uintptr_t*)& ResponseWindow::OldDlgProc = Detours::X64::DetourFunctionClass(OFFSET(0x0B5EB50, 0), &ResponseWindow::DlgProc);
-	*(uintptr_t*)& RenderWindow::OldDlgProc = Detours::X64::DetourFunctionClass(OFFSET(0x460570, 0), &RenderWindow::DlgProc);
-	*(uintptr_t*)& DataWindow::OldDlgProc = Detours::X64::DetourFunctionClass(OFFSET(0x5A8250, 0), &DataWindow::DlgProc);
-	*(uintptr_t*)& ActorWindow::OldDlgProc = Detours::X64::DetourFunctionClass(OFFSET(0x64B590, 0), &ActorWindow::DlgProc);
+	*(uintptr_t*)&MainWindow::OldWndProc = Detours::X64::DetourFunctionClass(OFFSET(0x05B74D0, 0), &MainWindow::WndProc);
+	*(uintptr_t*)&ObjectWindow::OldDlgProc = Detours::X64::DetourFunctionClass(OFFSET(0x03F9020, 0), &ObjectWindow::DlgProc);
+	*(uintptr_t*)&CellViewWindow::OldDlgProc = Detours::X64::DetourFunctionClass(OFFSET(0x059D820, 0), &CellViewWindow::DlgProc);
+	*(uintptr_t*)&ResponseWindow::OldDlgProc = Detours::X64::DetourFunctionClass(OFFSET(0x0B5EB50, 0), &ResponseWindow::DlgProc);
+	*(uintptr_t*)&RenderWindow::OldDlgProc = Detours::X64::DetourFunctionClass(OFFSET(0x460570, 0), &RenderWindow::DlgProc);
+	*(uintptr_t*)&DataWindow::OldDlgProc = Detours::X64::DetourFunctionClass(OFFSET(0x5A8250, 0), &DataWindow::DlgProc);
+	*(uintptr_t*)&ActorWindow::OldDlgProc = Detours::X64::DetourFunctionClass(OFFSET(0x64B590, 0), &ActorWindow::DlgProc);
 
 	if (UITheme::IsEnabledMode())
 	{
-		*(uintptr_t*)& PreferencesWindow::OldDlgProc = OFFSET(0x1335AF0, 0);
+		*(uintptr_t*)&PreferencesWindow::OldDlgProc = OFFSET(0x1335AF0, 0);
 		XUtil::DetourCall(OFFSET(0x1336521, 0), &PreferencesWindow::CreateDialogParamA);
 	}
 
@@ -344,10 +349,10 @@ VOID FIXAPI F_UIPatches(VOID)
 	XUtil::DetourJump(OFFSET(0x460239, 0), &EditorUI::hk_EndSendFromCellViewToRender);
 
 	//
-	// Replacing the Tips window "Do you know...". Which appears when the plugin is loaded.
+	// Replacing the Tips window "Do you know...". Which appears when the plugin is loaded. (no support cmd line)
 	//
 
-	if (enable = (BOOL)g_INI.GetBoolean("CreationKit", "ReplacingTipsWithProgressBar", FALSE); enable)
+	if (enable = (BOOL)g_INI.GetBoolean("CreationKit", "ReplacingTipsWithProgressBar", FALSE); enable && (nCountArgCmdLine == 1))
 	{
 		XUtil::PatchMemory(OFFSET(0x392260, 0), { 0xC3 });
 		XUtil::PatchMemory(OFFSET(0x3923C3, 0), { 0xC3 });
@@ -463,7 +468,13 @@ VOID FIXAPI MainFix_PatchFallout4CreationKit(VOID)
 {
 	if (!_stricmp((LPCSTR)(g_ModuleBase + 0x3896168), "1.10.162.0"))
 	{
-		// Left for the future...
+		std::string sCmdLineStr = GetCommandLineA();
+		LPSTR lpCmdLineStr = const_cast<LPSTR>(sCmdLineStr.c_str());
+		LPSTR lpArg = strtok(lpCmdLineStr, "\"");
+		while (lpArg != NULL) {
+			nCountArgCmdLine++;
+			lpArg = strtok(NULL, " ");
+		}
 	}
 	else
 	{
@@ -480,6 +491,10 @@ VOID FIXAPI MainFix_PatchFallout4CreationKit(VOID)
 		MessageBoxA(NULL, message, "Version Check", MB_ICONERROR);
 		return;
 	}
+
+	// run with cmd line (skip fixes)
+//	if (nCountArgCmdLine > 1)
+//		return;
 
 	//
 	// Replace broken crash dump functionality
