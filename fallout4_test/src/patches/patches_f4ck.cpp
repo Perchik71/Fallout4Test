@@ -475,7 +475,10 @@ VOID FIXAPI MainFix_PatchFallout4CreationKit(VOID)
 		LPSTR lpCmdLineStr = const_cast<LPSTR>(sCmdLineStr.c_str());
 		LPSTR lpArg = strtok(lpCmdLineStr, "\"");
 		while (lpArg != NULL) {
-			nCountArgCmdLine++;
+			// bimbo args? what...
+			if (strcmp(lpArg, " ") && (lpArg != ""))
+				nCountArgCmdLine++;
+
 			lpArg = strtok(NULL, "\"");
 		}
 	}
