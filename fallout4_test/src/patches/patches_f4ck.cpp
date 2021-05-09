@@ -352,34 +352,37 @@ VOID FIXAPI F_UIPatches(VOID)
 	// Replacing the Tips window "Do you know...". Which appears when the plugin is loaded. (no support cmd line)
 	//
 
-	if (enable = (BOOL)g_INI.GetBoolean("CreationKit", "ReplacingTipsWithProgressBar", FALSE); enable && (nCountArgCmdLine == 1))
+	if (enable = (BOOL)g_INI.GetBoolean("CreationKit", "ReplacingTipsWithProgressBar", FALSE); enable)
 	{
-		XUtil::PatchMemory(OFFSET(0x392260, 0), { 0xC3 });
-		XUtil::PatchMemory(OFFSET(0x3923C3, 0), { 0xC3 });
-		XUtil::PatchMemoryNop(OFFSET(0x5BE590, 0), 5);
+		if (nCountArgCmdLine == 1)
+		{
+			XUtil::PatchMemory(OFFSET(0x392260, 0), { 0xC3 });
+			XUtil::PatchMemory(OFFSET(0x3923C3, 0), { 0xC3 });
+			XUtil::PatchMemoryNop(OFFSET(0x5BE590, 0), 5);
 
-		XUtil::PatchMemory(OFFSET(0x7DEA53, 0), { 0x4C, 0x89, 0xD9 });
-		XUtil::DetourCall(OFFSET(0x7DEA56, 0), &EditorUI::hk_StepItProgress);
-		XUtil::PatchMemory(OFFSET(0x7DEA5B, 0), { 0xEB, 0x05 });
+			XUtil::PatchMemory(OFFSET(0x7DEA53, 0), { 0x4C, 0x89, 0xD9 });
+			XUtil::DetourCall(OFFSET(0x7DEA56, 0), &EditorUI::hk_StepItProgress);
+			XUtil::PatchMemory(OFFSET(0x7DEA5B, 0), { 0xEB, 0x05 });
 
-		// Load Files... Initializing...
-		XUtil::DetourClassCall(OFFSET(0x7E2FF6, 0), &TESDataFileHandler_CK::InitUnknownDataSetTextStatusBar);
-		// During the entire process, the update is only 95 times for each percentage.... very little, get in here for an update
-		XUtil::DetourCall(OFFSET(0x7DEA67, 0), &EditorUI::hk_UpdateProgress);
-		// Load Files... Done... etc.
-		XUtil::DetourCall(OFFSET(0x7E34FD, 0), &EditorUI::hk_SetTextAndSendStatusBar);
-		XUtil::DetourCall(OFFSET(0x7DC390, 0), &EditorUI::hk_SetTextAndSendStatusBar);
+			// Load Files... Initializing...
+			XUtil::DetourClassCall(OFFSET(0x7E2FF6, 0), &TESDataFileHandler_CK::InitUnknownDataSetTextStatusBar);
+			// During the entire process, the update is only 95 times for each percentage.... very little, get in here for an update
+			XUtil::DetourCall(OFFSET(0x7DEA67, 0), &EditorUI::hk_UpdateProgress);
+			// Load Files... Done... etc.
+			XUtil::DetourCall(OFFSET(0x7E34FD, 0), &EditorUI::hk_SetTextAndSendStatusBar);
+			XUtil::DetourCall(OFFSET(0x7DC390, 0), &EditorUI::hk_SetTextAndSendStatusBar);
 
-		// Run the progress dialog when loading the interior in the render.
-		XUtil::DetourCall(OFFSET(0x59F6B9, 0), &EditorUI::hk_SendFromCellViewToRender);
+			// Run the progress dialog when loading the interior in the render.
+			XUtil::DetourCall(OFFSET(0x59F6B9, 0), &EditorUI::hk_SendFromCellViewToRender);
 
-		// The terrain patch freezes, so a queue is created taking into account the activity of the dialog
-		XUtil::DetourClassCall(OFFSET(0x2629D96, 0), &Classes::CUIProgressDialog::ProcessMessages);
-		XUtil::DetourClassCall(OFFSET(0x262A6B2, 0), &Classes::CUIProgressDialog::ProcessMessages);
-		XUtil::DetourClassCall(OFFSET(0x262A6BF, 0), &Classes::CUIProgressDialog::ProcessMessages);
+			// The terrain patch freezes, so a queue is created taking into account the activity of the dialog
+			XUtil::DetourClassCall(OFFSET(0x2629D96, 0), &Classes::CUIProgressDialog::ProcessMessages);
+			XUtil::DetourClassCall(OFFSET(0x262A6B2, 0), &Classes::CUIProgressDialog::ProcessMessages);
+			XUtil::DetourClassCall(OFFSET(0x262A6BF, 0), &Classes::CUIProgressDialog::ProcessMessages);
 
-		// Experimental: Loading cell ... (need for progressbar drawing)
-		XUtil::DetourClassJump(OFFSET(0xE1D2C7, 0), &Classes::CUIProgressDialog::ProcessMessagesOnlyLoadCellWorld);
+			// Experimental: Loading cell ... (need for progressbar drawing)
+			XUtil::DetourClassJump(OFFSET(0xE1D2C7, 0), &Classes::CUIProgressDialog::ProcessMessagesOnlyLoadCellWorld);
+		}
 	}
 }
 
