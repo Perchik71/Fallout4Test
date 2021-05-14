@@ -12,3 +12,6 @@
 [submodule "Dependencies/detours"]
 	path = Dependencies/detours
 	url = https://github.com/Nukem9/detours.git
+[submodule "Perchik71"]
+	path = Dependencies/mINI
+	url = https://github.com/Perchik71/mINI

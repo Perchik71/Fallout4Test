@@ -29,7 +29,13 @@ __itt_heap_function ITT_FreeCallback;
 #pragma comment(lib, "tbbmalloc.lib")			// TBB Allocator
 
 HINSTANCE g_hModule;
+
+#if FALLOUT4_MINI_PROJECT
+mINIReader g_INI("fallout4_test.ini");
+mINIReader g_INI_CK("CreationKitPrefs.ini");
+#else
 INIReader g_INI("fallout4_test.ini");
+#endif // FALLOUT4_MINI_PROJECT
 
 uintptr_t g_ModuleBase;
 uintptr_t g_ModuleSize;

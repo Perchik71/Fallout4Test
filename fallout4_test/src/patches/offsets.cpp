@@ -1,5 +1,7 @@
 #include "../common.h"
 
+#include <map>
+
 std::unordered_map<uint64_t, uintptr_t> AddressMap;
 
 namespace Offsets

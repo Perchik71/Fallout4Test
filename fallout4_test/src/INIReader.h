@@ -1,5 +1,57 @@
 // Read an INI file into easy-to-access name/value pairs.
 
+#pragma once
+
+#include "config.h"
+
+#if FALLOUT4_MINI_PROJECT
+/*
+This is a tiny, header only C++ library for manipulating INI files.
+License
+Copyright (c) 2018 Danijel Durakovic
+
+MIT License
+*/
+
+#include "..\..\Dependencies\mINI\src\mini\ini.h"
+#include <string>
+
+typedef int INI_BOOL;
+typedef int INI_INT;
+typedef float INI_FLOAT;
+typedef double INI_REAL;
+typedef std::string INI_STR;
+typedef const std::string INI_FIELD_NAME;
+typedef const std::string INI_SECTION_NAME;
+
+// let's create the same class, so that we can rewrite it less.
+class mINIReader
+{
+private:
+	mINI::INIFile m_INIFile;
+	mINI::INIStructure m_INI;
+	char szBuf[128];
+	bool bChanged;
+public:
+	INI_STR Get(INI_SECTION_NAME& section, INI_FIELD_NAME& field, INI_STR ValueDef);
+	INI_BOOL GetBoolean(INI_SECTION_NAME& section, INI_FIELD_NAME& field, INI_BOOL ValueDef);
+	INI_FLOAT GetFloat(INI_SECTION_NAME& section, INI_FIELD_NAME& field, INI_FLOAT ValueDef);
+	INI_REAL GetReal(INI_SECTION_NAME& section, INI_FIELD_NAME& field, INI_REAL ValueDef);
+	INI_INT GetInteger(INI_SECTION_NAME& section, INI_FIELD_NAME& field, INI_INT ValueDef);
+
+	void Set(INI_SECTION_NAME& section, INI_FIELD_NAME& field, INI_STR Value);
+	void SetBoolean(INI_SECTION_NAME& section, INI_FIELD_NAME& field, INI_BOOL Value);
+	void SetFloat(INI_SECTION_NAME& section, INI_FIELD_NAME& field, INI_FLOAT Value);
+	void SetReal(INI_SECTION_NAME& section, INI_FIELD_NAME& field, INI_REAL Value);
+	void SetInteger(INI_SECTION_NAME& section, INI_FIELD_NAME& field, INI_INT Value);
+public:
+	void Reload(void);
+	void Save(void);
+public:
+	mINIReader(const std::string& fname);
+	virtual ~mINIReader(void);
+};
+#else
 // inih and INIReader are released under the New BSD license (see LICENSE.txt).
 // Go to the project home page for more info:
 //
@@ -12,9 +64,6 @@ home page for more info:
 https://github.com/benhoyt/inih
 
 */
-
-#ifndef __INI_H__
-#define __INI_H__
 
 /* Make this header file easier to include in C++ code */
 #ifdef __cplusplus
@@ -125,7 +174,7 @@ inline static char* rstrip(char* s)
 {
 	char* p = s + strlen(s);
 	while (p > s && isspace((unsigned char)(*--p)))
-		*p = '\0';
+		* p = '\0';
 	return s;
 }
 
@@ -216,7 +265,7 @@ inline int ini_parse_stream(ini_reader reader, void* stream, ini_handler handler
 #if INI_ALLOW_INLINE_COMMENTS
 			end = find_chars_or_comment(start, NULL);
 			if (*end)
-				*end = '\0';
+				* end = '\0';
 			rstrip(start);
 #endif
 
@@ -249,7 +298,7 @@ inline int ini_parse_stream(ini_reader reader, void* stream, ini_handler handler
 #if INI_ALLOW_INLINE_COMMENTS
 				end = find_chars_or_comment(value, NULL);
 				if (*end)
-					*end = '\0';
+					* end = '\0';
 #endif
 				rstrip(value);
 
@@ -278,7 +327,7 @@ inline int ini_parse_stream(ini_reader reader, void* stream, ini_handler handler
 }
 
 /* See documentation in header file. */
-inline int ini_parse_file(FILE* file, ini_handler handler, void* user)
+inline int ini_parse_file(FILE * file, ini_handler handler, void* user)
 {
 	return ini_parse_stream((ini_reader)fgets, file, handler, user);
 }
@@ -296,9 +345,6 @@ inline int ini_parse(const char* filename, ini_handler handler, void* user)
 	fclose(file);
 	return error;
 }
-
-#endif /* __INI_H__ */
-
 
 #ifndef __INIREADER_H__
 #define __INIREADER_H__
@@ -363,7 +409,7 @@ protected:
 #include <cctype>
 #include <cstdlib>
 
-inline INIReader::INIReader(const std::string& filename)
+inline INIReader::INIReader(const std::string & filename)
 {
 	_error = ini_parse(filename.c_str(), ValueHandler, this);
 }
@@ -378,13 +424,13 @@ inline const std::set<std::string>& INIReader::Sections() const
 	return _sections;
 }
 
-inline std::string INIReader::Get(const std::string& section, const std::string& name, const std::string& default_value) const
+inline std::string INIReader::Get(const std::string & section, const std::string & name, const std::string & default_value) const
 {
 	std::string key = MakeKey(section, name);
 	return _values.count(key) ? _values.at(key) : default_value;
 }
 
-inline long INIReader::GetInteger(const std::string& section, const std::string& name, long default_value) const
+inline long INIReader::GetInteger(const std::string & section, const std::string & name, long default_value) const
 {
 	std::string valstr = Get(section, name, "");
 	const char* value = valstr.c_str();
@@ -394,7 +440,7 @@ inline long INIReader::GetInteger(const std::string& section, const std::string&
 	return end > value ? n : default_value;
 }
 
-inline double INIReader::GetReal(const std::string& section, const std::string& name, double default_value) const
+inline double INIReader::GetReal(const std::string & section, const std::string & name, double default_value) const
 {
 	std::string valstr = Get(section, name, "");
 	const char* value = valstr.c_str();
@@ -403,7 +449,7 @@ inline double INIReader::GetReal(const std::string& section, const std::string& 
 	return end > value ? n : default_value;
 }
 
-inline bool INIReader::GetBoolean(const std::string& section, const std::string& name, bool default_value) const
+inline bool INIReader::GetBoolean(const std::string & section, const std::string & name, bool default_value) const
 {
 	std::string valstr = Get(section, name, "");
 	// Convert to lower case to make string comparisons case-insensitive
@@ -416,7 +462,7 @@ inline bool INIReader::GetBoolean(const std::string& section, const std::string&
 		return default_value;
 }
 
-inline std::string INIReader::MakeKey(const std::string& section, const std::string& name)
+inline std::string INIReader::MakeKey(const std::string & section, const std::string & name)
 {
 	std::string key = section + "=" + name;
 	// Convert to lower case to make section/name lookups case-insensitive
@@ -437,3 +483,4 @@ inline int INIReader::ValueHandler(void* user, const char* section, const char* 
 }
 
 #endif  // __INIREADER__
+#endif // FALLOUT4_MINI_PROJECT

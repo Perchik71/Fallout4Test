@@ -15,26 +15,28 @@
 #include <d3d11_2.h>
 #include <stdexcept>
 
-// Intel VTune
-#if SKYRIM64_USE_VTUNE
-#include <ittnotify.h>
-
-extern __itt_heap_function ITT_AllocateCallback;
-extern __itt_heap_function ITT_ReallocateCallback;
-extern __itt_heap_function ITT_FreeCallback;
-#endif
-
 // TBBMalloc
 #include <tbb/scalable_allocator.h>
 
 // Detours
 #include <detours/Detours.h>
 
+
 // INIReader
+
+#if FALLOUT4_MINI_PROJECT
+#include "INIReader.h"
+
+extern mINIReader g_INI;
+extern mINIReader g_INI_CK;
+#else
 #define INI_ALLOW_MULTILINE 0
 #define INI_USE_STACK 0
 #define INI_MAX_LINE 4096
 #include "INIReader.h"
+
+extern INIReader g_INI;
+#endif // FALLOUT4_MINI_PROJECT
 
 #include "UtfStr.h"
 #include "xutil.h"
@@ -44,7 +46,6 @@ extern __itt_heap_function ITT_FreeCallback;
 extern "C" IMAGE_DOS_HEADER __ImageBase;
 
 extern HINSTANCE g_hModule;
-extern INIReader g_INI;
 
 extern uintptr_t g_ModuleBase;
 extern uintptr_t g_ModuleSize;

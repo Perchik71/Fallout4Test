@@ -54,7 +54,7 @@ namespace EditorUI
 	{
 		InitCommonControls();
 		bReplaceTips = g_INI.GetBoolean("CreationKit", "UI", FALSE) && g_INI.GetBoolean("CreationKit", "ReplacingTipsWithProgressBar", FALSE);
-		timeInterval = std::min(std::max(g_INI.GetInteger("CreationKit", "FPSSpamInterval", 1000), (LONG)42), (LONG)1000);
+		timeInterval = std::min(std::max(g_INI.GetInteger("CreationKit", "FPSSpamInterval", 1000), (INI_INT)42), (INI_INT)1000);
 		timeStartTick = GetTickCount64();
 		UITheme::InitializeThread();
 

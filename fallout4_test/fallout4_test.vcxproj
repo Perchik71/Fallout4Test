@@ -258,6 +258,7 @@
     <ClInclude Include="src\xutil.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\INIReader.cpp" />
     <ClCompile Include="src\patches\bnet.cpp" />
     <ClCompile Include="src\patches\CKF4\ActorWindow.cpp" />
     <ClCompile Include="src\patches\CKF4\CellViewWindow.cpp" />
