@@ -18,7 +18,7 @@ In version 0.7, I redefined the HTML redactor material, because I don't know how
 Url: https://www.nexusmods.com/fallout4/mods/3635  
 Unzip the contents of the archive to the <root game>/Tools/MaterialEditor/ folder.
 
-Generate .lip files supported. Record file .wav using CK or Audacity.
+In version 1.1, generate .lip files supported. Record file .wav using CK or Audacity.
 As soon as the wav file will be loaded, you need to select it from the list and click the generate button. 
 If successful, the file will be where .wav is, but it will load only after opening the dialog again.
 It still uses CK32 and it should be installed.
@@ -36,6 +36,7 @@ The file must be in **ANSI** encoding.
 *fallout4_test.ini* the main file with the settings and comes with the code, be sure to read.
 
 # Unicode
+**ONLY SURROGATE**: Support for English and native languages without special characters.
 For understanding, the application uses the ancient **ANSI** type string representation.  
 The idea is to feed the text already in your native encoding.  
 When loading .esp, .esl, .esm files all strings are translated from UTF-8 to WinCP, and when saved back.  
@@ -47,6 +48,12 @@ At the moment, the project is built on **MS Visual Studio 2019 version 16.0.2**.
 On **MS Visual Studio 2019 version 16.8.4**, the project has errors and even if they fix the behavior the .dll will not be working.
 (Optional *CreationKitUnicodePlugin.dll* to compile, use **Lazarus 1.8.2 and higher**)  
 
+# Important 
+CK does not work well with ENB.
+I wrote f4ck_loader, download from tag 0.9 or compile master yourself. 
+The program is console and simple, for 15 seconds removes from the known to me .dll files that harm the work of CK this time is enough to load the CK itself.
+All deleted .dll files will be restored after this time.
+
 # License
 I deliver the code as-is with no restrictions for the global community and fans **Fallout 4**.
 
@@ -55,7 +62,7 @@ In the future, I will not be so active in the project, due to the fact that this
 In addition, there are no ideas what you need to add to the project.
 
 # Themes
-1. ![Image of Fallout4Test:Theme3](https://sun9-19.userapi.com/impg/UnLS-PwmQfTWh_GZOumqfkRXm4iFo8UAgoBdsw/w-e5kGGYvX0.jpg?size=1733x935&quality=96&sign=81f3b1c2914324ad62539c3db2c61b1c&type=album)
-1. ![Image of Fallout4Test:Theme2](https://sun9-11.userapi.com/impg/bsb1HZf7RAyq9u4rxCOQEnCn1l6fOo2Q4kI7CA/azLXMrj73kk.jpg?size=1729x941&quality=96&sign=90130684760f8cc1c752b8803fde654c&type=album)
-1. ![Image of Fallout4Test:Theme1](https://sun9-59.userapi.com/impg/UksWL5J6PGgvdHKLdJRn2lfrWc3DzYPmvzUD7w/9Z4EQfCPqkc.jpg?size=1731x939&quality=96&sign=cdf86044a58a33dcafeed097218b5ba5&type=album)
-1. ![Image of Fallout4Test:Theme0](https://sun9-33.userapi.com/impg/AANr99EErU0DbPoFTN50PvkuoMPusd4NFFGCkQ/5U6H_5Jqlyc.jpg?size=1729x939&quality=96&sign=17d0e4623d85e0aca94b30e0ff8ddf63&type=album)
+1. ![Image of Fallout4Test:Theme3](https://staticdelivery.nexusmods.com/mods/1151/images/51165/51165-1620695225-231609444.png)
+1. ![Image of Fallout4Test:Theme2](https://staticdelivery.nexusmods.com/mods/1151/images/51165/51165-1620695229-1041447606.png)
+1. ![Image of Fallout4Test:Theme1](https://staticdelivery.nexusmods.com/mods/1151/images/51165/51165-1620695240-1122105286.png)
+1. ![Image of Fallout4Test:Theme0](https://staticdelivery.nexusmods.com/mods/1151/images/51165/51165-1620695246-844758444.png)
