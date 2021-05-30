@@ -11,6 +11,7 @@ namespace Core
 		namespace UI
 		{
 			enum CUIImageListColorType {
+				ilct8Bit,
 				ilct24Bit,
 				ilct32Bit
 			};

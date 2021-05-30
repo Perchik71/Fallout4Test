@@ -103,12 +103,12 @@ namespace Core
 				if ((m_preaddres == src) && (heap.size() > 0))
 					return &heap.back()[0];
 
-				// remove extra spaces and convert
-				std::string utf8_str = XUtil::Conversion::AnsiToUtf8(XUtil::Str::trim(src));
+				// convert
+				std::string utf8_str = XUtil::Conversion::AnsiToUtf8(src);
 
 #ifdef __DBG_TRAN_UNICODE_WRITE
 				out.open("dbg_tu_write.txt", std::ios::app);
-				out << utf8_str << std::endl;
+				out << utf8_str << " " << src << std::endl;
 				out.close();
 #endif // __DBG_TRAN_UNICODE_WRITE
 

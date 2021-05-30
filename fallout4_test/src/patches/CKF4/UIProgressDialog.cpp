@@ -1,3 +1,4 @@
+#include "Editor.h"
 #include "EditorUI.h"
 #include "UIProgressDialog.h"
 #include "LogWindow.h"
@@ -26,12 +27,20 @@ namespace Core
 
 			CUIProgressDialog::CUIProgressDialog(CUICustomWindow* parent, const UINT res_id) :
 				CUICustomDialog(parent, res_id, DlgProc)
-			{}
+			{
+				// Enable message patch
+				LogWindow::Log("FIXES: Enable patch 'MessagePool'.");
+				bAllowPoolMessage = TRUE;
+			}
 
 			CUIProgressDialog::~CUIProgressDialog(VOID)
 			{
 				SetMarquee(FALSE);
 				FreeRelease();
+
+				// Disable message patch
+				bAllowPoolMessage = FALSE;
+				LogWindow::Log("FIXES: Disable patch 'MessagePool'.");
 			}
 
 			VOID CUIProgressDialog::SetMinAndMax(const UINT16 min, const UINT16 max)
@@ -54,7 +63,8 @@ namespace Core
 			{
 				if (m_Marquee) return;
 				m_Progress.Perform(PBM_SETPOS, value, 0);
-				Core::Classes::UI::CUIMainWindow::ProcessMessages();
+				// Fake run message pool
+				PatchMessage();
 			}
 
 			VOID CUIProgressDialog::SetMarquee(const BOOL value)
@@ -146,7 +156,8 @@ namespace Core
 			VOID FIXAPI CUIProgressDialog::ProcessMessages(VOID)
 			{
 				if (ProgressDialog)
-					Core::Classes::UI::CUIMainWindow::ProcessMessages();
+					// Fake run message pool
+					PatchMessage();
 				else
 					Sleep(1);
 			}
@@ -154,7 +165,8 @@ namespace Core
 			VOID FIXAPI CUIProgressDialog::ProcessMessagesOnlyLoadCellWorld(VOID)
 			{
 				if (ProgressDialog)
-					Core::Classes::UI::CUIMainWindow::ProcessMessages();
+					// Fake run message pool
+					PatchMessage();
 			}
 
 			LRESULT CUIProgressDialog::WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)

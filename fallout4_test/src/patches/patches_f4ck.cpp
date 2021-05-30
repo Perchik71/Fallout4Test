@@ -24,7 +24,7 @@
 #include "CKF4/ResponseWindow.h"
 #include "CKF4/DataWindow.h"
 #include "CKF4/PreferencesWindow.h"
-#include "CKF4/ActorWindow.h"
+//#include "CKF4/ActorWindow.h"
 
 #include <xbyak/xbyak.h>
 
@@ -118,18 +118,18 @@ VOID FIXAPI F_RequiredPatches(VOID)
 		//
 
 		// jump to function for useful work (messages pool)
-		XUtil::DetourClassJump(OFFSET(0x2485C46, 0), &Classes::CUIMainWindow::ProcessMessages);
-		XUtil::DetourClassJump(OFFSET(0x2485E46, 0), &Classes::CUIMainWindow::ProcessMessages);
-		XUtil::DetourClassJump(OFFSET(0xDF2FBA, 0), &Classes::CUIMainWindow::ProcessMessages);
-		XUtil::DetourClassJump(OFFSET(0x8531BD, 0), &Classes::CUIMainWindow::ProcessMessages);
-		XUtil::DetourClassJump(OFFSET(0x262D1A7, 0), &Classes::CUIMainWindow::ProcessMessages);
+		XUtil::DetourJump(OFFSET(0x2485C46, 0), &PatchMessage);
+		XUtil::DetourJump(OFFSET(0x2485E46, 0), &PatchMessage);
+		XUtil::DetourJump(OFFSET(0xDF2FBA, 0), &PatchMessage);
+		XUtil::DetourJump(OFFSET(0x8531BD, 0), &PatchMessage);
+		XUtil::DetourJump(OFFSET(0x262D1A7, 0), &PatchMessage);
 		// Replacing Sleep(1) on (messages pool)
-		XUtil::DetourClassCall(OFFSET(0x247EF69, 0), &Classes::CUIMainWindow::ProcessMessages);
-		XUtil::DetourClassCall(OFFSET(0x5DD8C2, 0), &Classes::CUIMainWindow::ProcessMessages);
-		XUtil::DetourClassCall(OFFSET(0x5DD7F2, 0), &Classes::CUIMainWindow::ProcessMessages);
+		XUtil::DetourCall(OFFSET(0x247EF69, 0), &PatchMessage);
+		XUtil::DetourCall(OFFSET(0x5DD8C2, 0), &PatchMessage);
+		XUtil::DetourCall(OFFSET(0x5DD7F2, 0), &PatchMessage);
 		// Replacing a completely empty function with something useful (messages pool)
-		XUtil::DetourClassCall(OFFSET(0x7E34D2, 0), &Classes::CUIMainWindow::ProcessMessages);
-		XUtil::DetourClassCall(OFFSET(0x773DEE, 0), &Classes::CUIMainWindow::ProcessMessages);
+		XUtil::DetourCall(OFFSET(0x7E34D2, 0), &PatchMessage);
+		XUtil::DetourCall(OFFSET(0x773DEE, 0), &PatchMessage);
 	}
 
 	//
@@ -279,7 +279,6 @@ VOID FIXAPI F_UIPatches(VOID)
 	*(uintptr_t*)&ResponseWindow::OldDlgProc = Detours::X64::DetourFunctionClass(OFFSET(0x0B5EB50, 0), &ResponseWindow::DlgProc);
 	*(uintptr_t*)&RenderWindow::OldDlgProc = Detours::X64::DetourFunctionClass(OFFSET(0x460570, 0), &RenderWindow::DlgProc);
 	*(uintptr_t*)&DataWindow::OldDlgProc = Detours::X64::DetourFunctionClass(OFFSET(0x5A8250, 0), &DataWindow::DlgProc);
-	*(uintptr_t*)&ActorWindow::OldDlgProc = Detours::X64::DetourFunctionClass(OFFSET(0x64B590, 0), &ActorWindow::DlgProc);
 
 	if (UITheme::IsEnabledMode())
 	{
@@ -432,21 +431,21 @@ VOID FIXAPI F_UnicodePatches(VOID)
 			XUtil::DetourClassCall(OFFSET(0x5A8ACD, 0), &Experimental::hk_SendDlgItemMessageA);
 			XUtil::DetourClassCall(OFFSET(0x5A8B07, 0), &Experimental::hk_SendDlgItemMessageA);
 			XUtil::DetourClassCall(OFFSET(0x5A8B3F, 0), &Experimental::hk_SendDlgItemMessageA);
+
+			//
+			// Cut check spelling window
+			//
+
+			XUtil::PatchMemoryNop(OFFSET(0x84D7EE, 0), 5);
+			XUtil::PatchMemoryNop(OFFSET(0xA55B7E, 0), 5);
+			XUtil::PatchMemoryNop(OFFSET(0xB08405, 0), 5);
+			XUtil::PatchMemoryNop(OFFSET(0xB5F59F, 0), 5);
+			XUtil::PatchMemoryNop(OFFSET(0xB5FECF, 0), 5);
+			XUtil::PatchMemoryNop(OFFSET(0xB600B9, 0), 5);
+			XUtil::PatchMemoryNop(OFFSET(0xB6D13E, 0), 5);
+			XUtil::PatchMemoryNop(OFFSET(0xBA0505, 0), 5);
+			XUtil::PatchMemoryNop(OFFSET(0xBED343, 0), 5);
 		}
-
-		//
-		// Cut check spelling window
-		//
-
-		XUtil::PatchMemoryNop(OFFSET(0x84D7EE, 0), 5);
-		XUtil::PatchMemoryNop(OFFSET(0xA55B7E, 0), 5);
-		XUtil::PatchMemoryNop(OFFSET(0xB08405, 0), 5);
-		XUtil::PatchMemoryNop(OFFSET(0xB5F59F, 0), 5);
-		XUtil::PatchMemoryNop(OFFSET(0xB5FECF, 0), 5);
-		XUtil::PatchMemoryNop(OFFSET(0xB600B9, 0), 5);
-		XUtil::PatchMemoryNop(OFFSET(0xB6D13E, 0), 5);
-		XUtil::PatchMemoryNop(OFFSET(0xBA0505, 0), 5);
-		XUtil::PatchMemoryNop(OFFSET(0xBED343, 0), 5);
 #else
 		LogWindow::Log("Unfortunately, your compiled version does not support the 'Experimental::Unicode' option.");
 #endif // !FALLOUT4_LAZ_UNICODE_PLUGIN

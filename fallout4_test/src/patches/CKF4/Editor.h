@@ -4,6 +4,7 @@
 #include "../TES/BSTArray.h"
 
 extern BOOL bFogToggle;
+extern BOOL bAllowPoolMessage;
 
 struct z_stream_s
 {
@@ -70,6 +71,20 @@ But this patch will make the button available.
 ==================
 */
 VOID FIXAPI PatchLip(VOID);
+
+
+/*
+==================
+PatchMessage
+
+Most often, CK freezes when loading something large. 
+But otherwise it works quite well. 
+I limit the impact of the message processing patch by setting the permission flag.
+
+I will give permission when loading with ProgressDialog enabled.
+==================
+*/
+VOID FIXAPI PatchMessage(VOID);
 
 
 /*

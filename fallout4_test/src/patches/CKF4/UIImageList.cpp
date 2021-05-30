@@ -167,8 +167,10 @@ namespace Core
 
 				if (eColorType == ilct24Bit)
 					uFlag = ILC_COLOR24;
-				else
+				else if (eColorType == ilct32Bit)
 					uFlag = ILC_COLOR32;
+				else
+					uFlag = ILC_COLOR;
 
 				m_hHandle = ImageList_Create(nSizeX, nSizeY, uFlag | (bMasked ? ILC_MASK : 0), 0, 0);
 				Assert(m_hHandle);

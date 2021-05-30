@@ -350,14 +350,14 @@
     <ClInclude Include="src\patches\CKF4\Editor.h">
       <Filter>Header Files\Patches\CK</Filter>
     </ClInclude>
-    <ClInclude Include="src\patches\CKF4\ActorWindow.h">
-      <Filter>Header Files\UI\Windows</Filter>
-    </ClInclude>
     <ClInclude Include="src\patches\CKF4\ShowHideWindow.h">
       <Filter>Header Files\UI\Windows</Filter>
     </ClInclude>
     <ClInclude Include="src\patches\CKF4\TESCellViewScene_CK.h">
       <Filter>Header Files\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\patches\CKF4\ActorWindow.h">
+      <Filter>Header Files\UI\Windows</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -565,9 +565,6 @@
     <ClCompile Include="src\patches\CKF4\UITheme\Memo.cpp">
       <Filter>Source Files\UI\Theme</Filter>
     </ClCompile>
-    <ClCompile Include="src\patches\CKF4\ActorWindow.cpp">
-      <Filter>Source Files\UI\Windows</Filter>
-    </ClCompile>
     <ClCompile Include="src\patches\CKF4\EditorUI.cpp">
       <Filter>Source Files\UI</Filter>
     </ClCompile>
@@ -588,6 +585,9 @@
     </ClCompile>
     <ClCompile Include="src\INIReader.cpp">
       <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\patches\CKF4\ActorWindow.cpp">
+      <Filter>Source Files\UI\Windows</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

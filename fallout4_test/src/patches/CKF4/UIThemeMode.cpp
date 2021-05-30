@@ -370,8 +370,13 @@ namespace UITheme
 					scrollBarTheme = Theme::Memo::Initialize(hWnd);
 				break;
 			case ThemeType::ListBox:
+				{
 				scrollBarTheme = Theme::ListBox::Initialize(hWnd);
-				PostMessageA(hWnd, WM_SETFONT, (WPARAM)listFont->Handle, TRUE);
+
+				LONG_PTR uID = GetWindowLongPtrA(hWnd, GWLP_ID);
+				if (uID != 0x7D0 && uID != 0x7D1)
+					PostMessageA(hWnd, WM_SETFONT, (WPARAM)listFont->Handle, TRUE);
+				}
 				break;
 			case ThemeType::ListView:
 				scrollBarTheme = Theme::ListView::Initialize(hWnd);
@@ -517,8 +522,13 @@ namespace UITheme
 			{
 				auto themeType = GetThemeTypeFromWindow(nmhdr->hwndFrom);
 
-				if (themeType == ThemeType::ToolBar)
+				switch (themeType)
+				{
+				case UITheme::ThemeType::ListView:
+					return Theme::ListView::OnCustomDraw(hWnd, (LPNMLVCUSTOMDRAW)lParam);
+				case UITheme::ThemeType::ToolBar:
 					return Theme::ToolBar::OnCustomDraw(hWnd, (LPNMTBCUSTOMDRAW)lParam);
+				}
 			}
 		}
 		break;

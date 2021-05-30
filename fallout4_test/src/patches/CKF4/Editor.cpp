@@ -9,10 +9,12 @@
 #include "EditorUI.h"
 #include "LogWindow.h"
 #include "MainWindow.h"
+#include "ActorWindow.h"
 
 #pragma comment(lib, "libdeflate.lib")
 
 BOOL bFogToggle = TRUE;
+BOOL bAllowPoolMessage = FALSE;
 
 struct DialogOverrideData
 {
@@ -89,6 +91,10 @@ HWND WINAPI hk_CreateDialogParamA(HINSTANCE hInstance, LPCSTR lpTemplateName, HW
 	DlgData.DialogFunc = lpDialogFunc;
 	DlgData.IsDialog = FALSE;
 
+	BOOL bUIEnabled = (BOOL)g_INI.GetBoolean("CreationKit", "UI", FALSE);
+	if (!bUIEnabled && ((uintptr_t)lpTemplateName == 122 || (uintptr_t)lpTemplateName == 175))
+		goto skip_hk_CreateDialogParamA;
+
 	// Override certain default dialogs to use this DLL's resources
 	switch ((uintptr_t)lpTemplateName)
 	{
@@ -107,6 +113,14 @@ HWND WINAPI hk_CreateDialogParamA(HINSTANCE hInstance, LPCSTR lpTemplateName, HW
 		break;
 	}
 
+	// Actor Dlg
+	if ((uintptr_t)lpTemplateName == 3202)
+	{
+		ActorWindow::OldDlgProc = DlgData.DialogFunc;
+		DlgData.DialogFunc = ActorWindow::DlgProc;
+	}
+
+skip_hk_CreateDialogParamA:
 	return CreateDialogParamA(hInstance, lpTemplateName, hWndParent, DialogFuncOverride, dwInitParam);
 }
 
@@ -116,6 +130,10 @@ INT_PTR WINAPI hk_DialogBoxParamA(HINSTANCE hInstance, LPCSTR lpTemplateName, HW
 	DlgData.DialogFunc = lpDialogFunc;
 	DlgData.IsDialog = TRUE;
 
+	BOOL bUIEnabled = (BOOL)g_INI.GetBoolean("CreationKit", "UI", FALSE);
+	if (!bUIEnabled && ((uintptr_t)lpTemplateName == 122 || (uintptr_t)lpTemplateName == 175))
+		goto skip_hk_DialogBoxParamA;
+
 	// Override certain default dialogs to use this DLL's resources
 	switch ((uintptr_t)lpTemplateName)
 	{
@@ -134,6 +152,15 @@ INT_PTR WINAPI hk_DialogBoxParamA(HINSTANCE hInstance, LPCSTR lpTemplateName, HW
 		break;
 	}
 
+	// Actor Dlg
+	if ((uintptr_t)lpTemplateName == 3202)
+	{
+		ActorWindow::OldDlgProc = DlgData.DialogFunc;
+		DlgData.DialogFunc = ActorWindow::DlgProc;
+	}
+
+
+skip_hk_DialogBoxParamA:
 	return DialogBoxParamA(hInstance, lpTemplateName, hWndParent, DialogFuncOverride, dwInitParam);
 }
 
@@ -718,6 +745,24 @@ VOID FIXAPI PatchLip(VOID)
 	XUtil::PatchMemoryNop(OFFSET(0xB5EEFB, 0), 25);
 	// In case of cancellation .wav triggers and closes the button, we will remove everything
 	XUtil::DetourCall(OFFSET(0xB5F182, 0), &hk_jmp_B62A9B);
+}
+
+
+/*
+==================
+PatchMessage
+
+Most often, CK freezes when loading something large.
+But otherwise it works quite well.
+I limit the impact of the message processing patch by setting the permission flag.
+
+I will give permission when loading with ProgressDialog enabled.
+==================
+*/
+VOID FIXAPI PatchMessage(VOID)
+{
+	if (bAllowPoolMessage)
+		Core::Classes::UI::CUIMainWindow::ProcessMessages();
 }
 
 

@@ -4,6 +4,8 @@
 
 #include <vsstyle.h>
 
+#define UI_CONTROL_CONDITION_ID 0xFA0
+
 namespace Core
 {
 	namespace UI
@@ -67,6 +69,56 @@ namespace Core
 					}
 
 					return DefSubclassProc(hWnd, uMsg, wParam, lParam);
+				}
+
+				LRESULT FIXAPI OnCustomDraw(HWND hWindow, LPNMLVCUSTOMDRAW lpListView)
+				{
+					// skip it controls
+					switch (lpListView->nmcd.hdr.idFrom)
+					{
+					case 1041:
+					case 1155:
+					case 1156:
+						return DefSubclassProc(hWindow, WM_NOTIFY, 0, (LPARAM)lpListView);
+					}
+
+					Graphics::CUICanvas Canvas(lpListView->nmcd.hdc);
+
+					switch (lpListView->nmcd.dwDrawStage)
+					{
+					//Before the paint cycle begins
+					case CDDS_PREPAINT:
+					{
+						//request notifications for individual listview items
+						return CDRF_NOTIFYITEMDRAW;
+					}
+					//Before an item is drawn
+					case CDDS_ITEMPREPAINT:
+					{
+						return CDRF_NOTIFYSUBITEMDRAW;
+					}
+					//Before a subitem is drawn
+					case CDDS_SUBITEM | CDDS_ITEMPREPAINT:
+					{
+						switch (lpListView->nmcd.hdr.idFrom)
+						{
+						case UI_CONTROL_CONDITION_ID:
+						{
+							if (lpListView->iSubItem == 0 || lpListView->iSubItem == 5)
+								lpListView->clrText = GetThemeSysColor(ThemeColor_Text_2);
+							else
+								lpListView->clrText = GetThemeSysColor(ThemeColor_Text_4);		
+
+							return CDRF_NEWFONT;
+						}
+						default:
+							lpListView->clrText = GetThemeSysColor(ThemeColor_Text_4);
+							return CDRF_NEWFONT;
+						}
+					}
+					default:
+						return CDRF_DODEFAULT;
+					}
 				}
 			}
 		}
