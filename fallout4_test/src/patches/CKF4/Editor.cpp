@@ -258,8 +258,8 @@ uint32_t FIXAPI sub_1405B31C0_SSE41(BSTArray<LPVOID>& Array, LPCVOID &Target)
 
 	for (uint32_t iter = 0; iter < vectorizedIterations; iter++)
 	{
-		__m128i test1 = _mm_cmpeq_epi64(targets, _mm_loadu_si128((__m128i *)&data[index + 0]));
-		__m128i test2 = _mm_cmpeq_epi64(targets, _mm_loadu_si128((__m128i *)&data[index + 2]));
+		__m128i test1 = _mm_cmpeq_epi64(targets, _mm_loadu_si128((__m128i*)&data[index + 0]));
+		__m128i test2 = _mm_cmpeq_epi64(targets, _mm_loadu_si128((__m128i*)&data[index + 2]));
 
 		INT32 mask = _mm_movemask_pd(_mm_castsi128_pd(_mm_or_si128(test1, test2)));
 

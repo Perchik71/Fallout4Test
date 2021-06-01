@@ -24,7 +24,10 @@
 #include "CKF4/ResponseWindow.h"
 #include "CKF4/DataWindow.h"
 #include "CKF4/PreferencesWindow.h"
-//#include "CKF4/ActorWindow.h"
+
+// include json generator dialogs
+#include "CKF4/JsonDialogGenerator.h"
+
 
 #include <xbyak/xbyak.h>
 
@@ -383,6 +386,10 @@ VOID FIXAPI F_UIPatches(VOID)
 			XUtil::DetourClassJump(OFFSET(0xE1D2C7, 0), &Classes::CUIProgressDialog::ProcessMessagesOnlyLoadCellWorld);
 		}
 	}
+
+	// Initializing the dialog manager. 
+	// Loading all supported dialogs.
+	//Classes::g_JsonDialogManager = new Classes::CJsonDialogManager();
 }
 
 

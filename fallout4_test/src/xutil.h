@@ -215,6 +215,9 @@ namespace XUtil
 		// https://docs.microsoft.com/en-us/windows/win32/debug/retrieving-the-last-error-code
 		std::string __stdcall GetLastErrorToStr(DWORD err, const std::string& namefunc);
 		std::string __stdcall GetLastErrorToStr(const std::string& namefunc);
+
+		// formating string
+		std::string format(const char* fmt, ...);
 	}
 
 	void SetThreadName(uint32_t ThreadID, const char *ThreadName);

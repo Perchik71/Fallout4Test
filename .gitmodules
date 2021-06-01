@@ -2,10 +2,6 @@
 	path = Dependencies/meshoptimizer
 	url = https://github.com/zeux/meshoptimizer.git
 	branch = master
-[submodule "Dependencies/tbb"]
-	path = Dependencies/tbb
-	url = https://github.com/01org/tbb.git
-	branch = tbb_2019
 [submodule "Dependencies/libdeflate"]
 	path = Dependencies/libdeflate
 	url = https://github.com/ebiggers/libdeflate.git
@@ -15,3 +11,13 @@
 [submodule "Perchik71"]
 	path = Dependencies/mINI
 	url = https://github.com/Perchik71/mINI
+[submodule "Dependencies/json"]
+	path = Dependencies/json
+	url = https://github.com/nlohmann/json.git
+[submodule "Dependencies/tbb"]
+	path = Dependencies/tbb
+	url = https://github.com/oneapi-src/oneTBB.git
+	branch = tbb_2020
+[submodule "Dependencies/zipper"]
+	path = Dependencies/zipper
+	url = https://github.com/kuba--/zip.git

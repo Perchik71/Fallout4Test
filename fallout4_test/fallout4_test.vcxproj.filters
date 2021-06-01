@@ -81,6 +81,12 @@
     <Filter Include="Source Files\UI\Theme">
       <UniqueIdentifier>{15465807-fb72-43fe-a815-6fe39cdff7e4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="__dependencies">
+      <UniqueIdentifier>{81995caa-f5d0-49b7-965d-68c1333396e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="__dependencies\zipper">
+      <UniqueIdentifier>{966ff70e-c235-430f-9b45-98e040be03f6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\profiler.h">
@@ -359,6 +365,15 @@
     <ClInclude Include="src\patches\CKF4\ActorWindow.h">
       <Filter>Header Files\UI\Windows</Filter>
     </ClInclude>
+    <ClInclude Include="src\patches\CKF4\JsonDialogGenerator.h">
+      <Filter>Header Files\UI\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Dependencies\zipper\src\zip.h">
+      <Filter>__dependencies\zipper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Dependencies\zipper\src\miniz.h">
+      <Filter>__dependencies\zipper</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\dllmain.cpp">
@@ -588,6 +603,12 @@
     </ClCompile>
     <ClCompile Include="src\patches\CKF4\ActorWindow.cpp">
       <Filter>Source Files\UI\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="src\patches\CKF4\JsonDialogGenerator.cpp">
+      <Filter>Source Files\UI\Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Dependencies\zipper\src\zip.c">
+      <Filter>__dependencies\zipper</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

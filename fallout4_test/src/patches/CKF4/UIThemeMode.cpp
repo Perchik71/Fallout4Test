@@ -252,7 +252,7 @@ namespace UITheme
 	{
 		if (nCode == HC_ACTION)
 		{
-			if (auto messageData = reinterpret_cast<CWPSTRUCT*>(lParam); (messageData->message == WM_CREATE)/* || messageData->message == WM_INITDIALOG*/)
+			if (auto messageData = reinterpret_cast<CWPSTRUCT*>(lParam); messageData->message == WM_CREATE)
 			{
 				LPCREATESTRUCTA lpCreateStruct = (LPCREATESTRUCTA)messageData->lParam;
 				if (lpCreateStruct)
@@ -557,8 +557,8 @@ namespace UITheme
 		if ((Theme::GetTheme() == Theme::Theme_Dark) || (Theme::GetTheme() == Theme::Theme_DarkGray))
 		{
 			// detected standart OS theme (comdlg32)
-			COLORREF clTest = GetPixel(hdc, pRect->left + 2, pRect->top + 2);
-			if (((GetRValue(clTest) + GetGValue(clTest) + GetBValue(clTest)) / 3) > 128)
+			COLORREF clTest = GetPixel(hdc, pRect->left + ((pRect->right - pRect->left) >> 1), pRect->top + 2);
+			if (CLR_INVALID != clTest && ((GetRValue(clTest) + GetGValue(clTest) + GetBValue(clTest)) / 3) > 128)
 				return DrawThemeText(hTheme, hdc, iPartId, iStateId, pszText, cchText, dwTextFlags, dwTextFlags2, pRect);
 		}
 

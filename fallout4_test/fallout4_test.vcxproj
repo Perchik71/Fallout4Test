@@ -164,6 +164,8 @@
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\Dependencies\zipper\src\miniz.h" />
+    <ClInclude Include="..\Dependencies\zipper\src\zip.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="src\config.h" />
     <ClInclude Include="src\erase_if.h" />
@@ -173,6 +175,7 @@
     <ClInclude Include="src\patches\CKF4\DataWindow.h" />
     <ClInclude Include="src\patches\CKF4\Editor.h" />
     <ClInclude Include="src\patches\CKF4\EditorUI.h" />
+    <ClInclude Include="src\patches\CKF4\JsonDialogGenerator.h" />
     <ClInclude Include="src\patches\CKF4\PreferencesWindow.h" />
     <ClInclude Include="src\patches\CKF4\ShowHideWindow.h" />
     <ClInclude Include="src\patches\CKF4\TESCellViewScene_CK.h" />
@@ -258,12 +261,14 @@
     <ClInclude Include="src\xutil.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Dependencies\zipper\src\zip.c" />
     <ClCompile Include="src\INIReader.cpp" />
     <ClCompile Include="src\patches\bnet.cpp" />
     <ClCompile Include="src\patches\CKF4\ActorWindow.cpp" />
     <ClCompile Include="src\patches\CKF4\CellViewWindow.cpp" />
     <ClCompile Include="src\patches\CKF4\DataWindow.cpp" />
     <ClCompile Include="src\patches\CKF4\Editor.cpp" />
+    <ClCompile Include="src\patches\CKF4\JsonDialogGenerator.cpp" />
     <ClCompile Include="src\patches\CKF4\PreferencesWindow.cpp" />
     <ClCompile Include="src\patches\CKF4\EditorUIProgressDialog.cpp" />
     <ClCompile Include="src\patches\CKF4\ExperimentalNuukem.cpp" />

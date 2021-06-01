@@ -56,4 +56,9 @@ fallout4_test/resource.aps
 Dependencies/libdeflate.vcxproj.user
 Dependencies/libdeflate.vcxproj
 Dependencies/tbb
+Dependencies/json
 *.lnk
+
+# other
+*.cer
+*.bat

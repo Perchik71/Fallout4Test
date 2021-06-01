@@ -159,6 +159,18 @@ size_t XUtil::Str::findCaseInsensitive(std::string data, std::string toSearch, s
 	return data.find(toSearch, pos);
 }
 
+std::string XUtil::Str::format(const char* fmt, ...)
+{
+	va_list va;
+	char message[2048];
+
+	va_start(va, fmt);
+	_vsnprintf(&message[0], _TRUNCATE, fmt, va);
+	va_end(va);
+
+	return message;
+}
+
 void XUtil::Trim(char *Buffer, char C)
 {
 	size_t len = strlen(Buffer);

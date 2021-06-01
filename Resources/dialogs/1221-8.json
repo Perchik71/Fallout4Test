@@ -1,0 +1,12 @@
+{
+  "name": "Habrahabr",
+  "nothing": null,
+  "answer": {
+    "everything": 42
+  },
+  "companies": ["Infopulse", "TM"],
+  "user": {
+    "name": "tangro",
+    "active": true
+  }
+}
