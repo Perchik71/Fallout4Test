@@ -49,8 +49,8 @@ namespace Core
 
 					Assert((NewUITimeOfDayComponents.hWndLabel.Handle) && (NewUITimeOfDayComponents.hWndTrackBar.Handle) && (NewUITimeOfDayComponents.hWndEdit.Handle));
 
-					ThemeFont.Apply(NewUITimeOfDayComponents.hWndLabel.Handle);
-					ThemeFont.Apply(NewUITimeOfDayComponents.hWndEdit.Handle);
+					ThemeFont->Apply(NewUITimeOfDayComponents.hWndLabel.Handle);
+					ThemeFont->Apply(NewUITimeOfDayComponents.hWndEdit.Handle);
 
 					return hPanel;
 				}

@@ -87,6 +87,9 @@
     <Filter Include="__dependencies\zipper">
       <UniqueIdentifier>{966ff70e-c235-430f-9b45-98e040be03f6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="__dependencies\jDialogs">
+      <UniqueIdentifier>{480afd49-7d48-4f91-a6cb-125fb4154eca}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\profiler.h">
@@ -365,14 +368,17 @@
     <ClInclude Include="src\patches\CKF4\ActorWindow.h">
       <Filter>Header Files\UI\Windows</Filter>
     </ClInclude>
-    <ClInclude Include="src\patches\CKF4\JsonDialogGenerator.h">
-      <Filter>Header Files\UI\Classes</Filter>
-    </ClInclude>
     <ClInclude Include="..\Dependencies\zipper\src\zip.h">
       <Filter>__dependencies\zipper</Filter>
     </ClInclude>
     <ClInclude Include="..\Dependencies\zipper\src\miniz.h">
       <Filter>__dependencies\zipper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Dependencies\jDialogs\include\jdialogs.h">
+      <Filter>__dependencies\jDialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\patches\CKF4\UIDialogManager.h">
+      <Filter>Header Files\UI\Classes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -604,11 +610,14 @@
     <ClCompile Include="src\patches\CKF4\ActorWindow.cpp">
       <Filter>Source Files\UI\Windows</Filter>
     </ClCompile>
-    <ClCompile Include="src\patches\CKF4\JsonDialogGenerator.cpp">
-      <Filter>Source Files\UI\Classes</Filter>
-    </ClCompile>
     <ClCompile Include="..\Dependencies\zipper\src\zip.c">
       <Filter>__dependencies\zipper</Filter>
+    </ClCompile>
+    <ClCompile Include="src\patches\CKF4\UIDialogManager.cpp">
+      <Filter>Source Files\UI\Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\jDialogs\jDialogs\include\jdialogs.cpp">
+      <Filter>__dependencies\jDialogs</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -639,7 +648,12 @@
     <Image Include="..\Resources\types.bmp">
       <Filter>Resources</Filter>
     </Image>
-    <Image Include="..\Resources\toolbar_light.bmp" />
+    <Image Include="..\Resources\toolbar_light.bmp">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="..\Resources\logo.bmp">
+      <Filter>Resources</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc">

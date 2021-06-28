@@ -10,6 +10,7 @@
 #include "LogWindow.h"
 #include "MainWindow.h"
 #include "ActorWindow.h"
+#include "UIDialogManager.h"
 
 #pragma comment(lib, "libdeflate.lib")
 
@@ -91,9 +92,15 @@ HWND WINAPI hk_CreateDialogParamA(HINSTANCE hInstance, LPCSTR lpTemplateName, HW
 	DlgData.DialogFunc = lpDialogFunc;
 	DlgData.IsDialog = FALSE;
 
-	BOOL bUIEnabled = (BOOL)g_INI.GetBoolean("CreationKit", "UI", FALSE);
-	if (!bUIEnabled && ((uintptr_t)lpTemplateName == 122 || (uintptr_t)lpTemplateName == 175))
+	if (!g_UIEnabled)
 		goto skip_hk_CreateDialogParamA;
+	
+	// Actor Dlg
+	if ((uintptr_t)lpTemplateName == 3202)
+	{
+		ActorWindow::OldDlgProc = DlgData.DialogFunc;
+		DlgData.DialogFunc = ActorWindow::DlgProc;
+	}
 
 	// Override certain default dialogs to use this DLL's resources
 	switch ((uintptr_t)lpTemplateName)
@@ -104,6 +111,7 @@ HWND WINAPI hk_CreateDialogParamA(HINSTANCE hInstance, LPCSTR lpTemplateName, HW
 	case 166:
 	case 175:
 	case 220:
+	case 235:
 	case 243:
 	case 252:
 	case 279:
@@ -113,11 +121,25 @@ HWND WINAPI hk_CreateDialogParamA(HINSTANCE hInstance, LPCSTR lpTemplateName, HW
 		break;
 	}
 
-	// Actor Dlg
-	if ((uintptr_t)lpTemplateName == 3202)
+	if ((g_i8DialogMode > 0) && g_DialogManager)
 	{
-		ActorWindow::OldDlgProc = DlgData.DialogFunc;
-		DlgData.DialogFunc = ActorWindow::DlgProc;
+		Core::Classes::UI::jDialog* dialog = NULL;
+
+		switch (g_i8DialogMode)
+		{
+		case 1:
+			dialog = g_DialogManager->GetDialog((ULONG)lpTemplateName, Core::Classes::UI::jdt8pt);
+			break;
+		/*case 2:
+			dialog = g_DialogManager->GetDialog((ULONG)lpTemplateName, Core::Classes::UI::jdt9pt);
+			break;*/
+		case 3:
+			dialog = g_DialogManager->GetDialog((ULONG)lpTemplateName, Core::Classes::UI::jdt10pt);
+			break;
+		}
+
+		if (dialog)
+			return dialog->Show(hWndParent, DialogFuncOverride, dwInitParam, hInstance);
 	}
 
 skip_hk_CreateDialogParamA:
@@ -130,9 +152,15 @@ INT_PTR WINAPI hk_DialogBoxParamA(HINSTANCE hInstance, LPCSTR lpTemplateName, HW
 	DlgData.DialogFunc = lpDialogFunc;
 	DlgData.IsDialog = TRUE;
 
-	BOOL bUIEnabled = (BOOL)g_INI.GetBoolean("CreationKit", "UI", FALSE);
-	if (!bUIEnabled && ((uintptr_t)lpTemplateName == 122 || (uintptr_t)lpTemplateName == 175))
+	if (!g_UIEnabled)
 		goto skip_hk_DialogBoxParamA;
+
+	// Actor Dlg
+	if ((uintptr_t)lpTemplateName == 3202)
+	{
+		ActorWindow::OldDlgProc = DlgData.DialogFunc;
+		DlgData.DialogFunc = ActorWindow::DlgProc;
+	}
 
 	// Override certain default dialogs to use this DLL's resources
 	switch ((uintptr_t)lpTemplateName)
@@ -143,6 +171,7 @@ INT_PTR WINAPI hk_DialogBoxParamA(HINSTANCE hInstance, LPCSTR lpTemplateName, HW
 	case 166:
 	case 175:
 	case 220:
+	case 235:
 	case 243:
 	case 252:
 	case 279:
@@ -152,13 +181,26 @@ INT_PTR WINAPI hk_DialogBoxParamA(HINSTANCE hInstance, LPCSTR lpTemplateName, HW
 		break;
 	}
 
-	// Actor Dlg
-	if ((uintptr_t)lpTemplateName == 3202)
+	if ((g_i8DialogMode > 0) && g_DialogManager)
 	{
-		ActorWindow::OldDlgProc = DlgData.DialogFunc;
-		DlgData.DialogFunc = ActorWindow::DlgProc;
-	}
+		Core::Classes::UI::jDialog* dialog = NULL;
 
+		switch (g_i8DialogMode)
+		{
+		case 1:
+			dialog = g_DialogManager->GetDialog((ULONG)lpTemplateName, Core::Classes::UI::jdt8pt);
+			break;
+		/*case 2:
+			dialog = g_DialogManager->GetDialog((ULONG)lpTemplateName, Core::Classes::UI::jdt9pt);
+			break;*/
+		case 3:
+			dialog = g_DialogManager->GetDialog((ULONG)lpTemplateName, Core::Classes::UI::jdt10pt);
+			break;
+		}
+
+		if (dialog)
+			return dialog->ShowModal(hWndParent, DialogFuncOverride, dwInitParam, hInstance);
+	}
 
 skip_hk_DialogBoxParamA:
 	return DialogBoxParamA(hInstance, lpTemplateName, hWndParent, DialogFuncOverride, dwInitParam);
@@ -610,31 +652,6 @@ VOID FIXAPI hk_call_F8AF16(const TESCellViewSceneRenderInfo_CK* RenderInfo)
 	//This function resets the fog parameters and resets them again...
 	((VOID(__fastcall*)(const TESCellViewSceneRenderInfo_CK*))OFFSET(0xF8B6A0, 0))(RenderInfo);
 }
-
-
-/*
-==================
-hk_jmp_F8A7DC
-==================
-*/
-/*VOID FIXAPI hk_jmp_F8A7DC(VOID)
-{
-	TESCellViewScene_CK* view = TESCellViewScene_CK::GetCellViewScene();
-	TESCellViewSceneRenderInfo_CK* r_info = view->RenderInfo;
-	
-	if (view->IsInteriorsCell())
-	{
-		MainWindow::GetMainMenuObj().GetItem(UI_FOG_CMD).Enabled = TRUE;
-		MainWindow::GetMainMenuObj().GetItem(UI_SKY_TOGGLE_CMD).Enabled = FALSE;
-	}
-	else 
-	{
-		MainWindow::GetMainMenuObj().GetItem(UI_FOG_CMD).Enabled = FALSE;
-		MainWindow::GetMainMenuObj().GetItem(UI_SKY_TOGGLE_CMD).Enabled = TRUE;
-	}
-
-	((VOID(__fastcall*)(const TESCellViewSceneRenderInfo_CK*))OFFSET(0xF8E1D0, 0))(r_info);
-}*/
 
 
 /*

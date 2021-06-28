@@ -50,5 +50,8 @@ uintptr_t g_RdataEnd;
 uintptr_t g_DataBase;	// .data
 uintptr_t g_DataEnd;
 
+bool g_UIEnabled = false;
+int8_t g_i8DialogMode = 0;
+
 GAME_EXECUTABLE_TYPE g_LoadType;
 char g_GitVersion[64] = VER_CURRENT_COMMIT_ID;

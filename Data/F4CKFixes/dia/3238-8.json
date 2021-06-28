@@ -1,0 +1,31 @@
+{
+  "ExStyle": [ "WS_EX_COMPOSITED" ],
+  "Style": [ "DS_CENTER", "WS_DLGFRAME", "DS_MODALFRAME", "WS_CAPTION" ],
+  "Title": "Progress",
+  "Width": 281,
+  "Height": 72,
+  "FontName": "Microsoft Sans Serif",
+  "FontSize": 8,
+  "FontWeight": 400,
+  "FontItalic": 0,
+  "Controls": [
+    {
+      "Type": "CTEXT",
+      "Title": "",
+      "Id": 2217,
+      "x": 4,
+      "y": 8,
+      "Width": 267,
+      "Height": 16
+    },
+    {
+      "Type": "PROGRESSBAR",
+      "Style": [ "WS_BORDER" ],
+      "Id": 31007,
+      "x": 4,
+      "y": 32,
+      "Width": 273,
+      "Height": 32
+    }
+  ]
+}

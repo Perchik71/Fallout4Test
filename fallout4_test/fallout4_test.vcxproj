@@ -104,7 +104,7 @@
       <PrecompiledHeader>
       </PrecompiledHeader>
       <Optimization>MaxSpeed</Optimization>
-      <PreprocessorDefinitions>NOMINMAX;NDEBUG;_WINDOWS;_USRDLL;FALLOUT4=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>JDIALOG_4x4_DIALOG_UINT;NOMINMAX;NDEBUG;_WINDOWS;_USRDLL;FALLOUT4=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <UseMSVC>false</UseMSVC>
@@ -164,6 +164,7 @@
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\Dependencies\jDialogs\include\jdialogs.h" />
     <ClInclude Include="..\Dependencies\zipper\src\miniz.h" />
     <ClInclude Include="..\Dependencies\zipper\src\zip.h" />
     <ClInclude Include="resource.h" />
@@ -175,7 +176,7 @@
     <ClInclude Include="src\patches\CKF4\DataWindow.h" />
     <ClInclude Include="src\patches\CKF4\Editor.h" />
     <ClInclude Include="src\patches\CKF4\EditorUI.h" />
-    <ClInclude Include="src\patches\CKF4\JsonDialogGenerator.h" />
+    <ClInclude Include="src\patches\CKF4\UIDialogManager.h" />
     <ClInclude Include="src\patches\CKF4\PreferencesWindow.h" />
     <ClInclude Include="src\patches\CKF4\ShowHideWindow.h" />
     <ClInclude Include="src\patches\CKF4\TESCellViewScene_CK.h" />
@@ -261,6 +262,7 @@
     <ClInclude Include="src\xutil.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\jDialogs\jDialogs\include\jdialogs.cpp" />
     <ClCompile Include="..\Dependencies\zipper\src\zip.c" />
     <ClCompile Include="src\INIReader.cpp" />
     <ClCompile Include="src\patches\bnet.cpp" />
@@ -268,7 +270,7 @@
     <ClCompile Include="src\patches\CKF4\CellViewWindow.cpp" />
     <ClCompile Include="src\patches\CKF4\DataWindow.cpp" />
     <ClCompile Include="src\patches\CKF4\Editor.cpp" />
-    <ClCompile Include="src\patches\CKF4\JsonDialogGenerator.cpp" />
+    <ClCompile Include="src\patches\CKF4\UIDialogManager.cpp" />
     <ClCompile Include="src\patches\CKF4\PreferencesWindow.cpp" />
     <ClCompile Include="src\patches\CKF4\EditorUIProgressDialog.cpp" />
     <ClCompile Include="src\patches\CKF4\ExperimentalNuukem.cpp" />
@@ -351,6 +353,7 @@
   <ItemGroup>
     <Image Include="..\Resources\check.bmp" />
     <Image Include="..\Resources\check_darktheme.bmp" />
+    <Image Include="..\Resources\logo.bmp" />
     <Image Include="..\Resources\toolbar.bmp" />
     <Image Include="..\Resources\toolbar_light.bmp" />
     <Image Include="..\Resources\types.bmp" />

@@ -1,0 +1,239 @@
+{
+  "Style": [ "WS_MINIMIZEBOX", "WS_SYSMENU", "DS_CENTER", "WS_DLGFRAME", "DS_MODALFRAME", "WS_CAPTION" ],
+  "Title": "Enchantment",
+  "Width": 576,
+  "Height": 340,
+  "FontName": "Microsoft Sans Serif",
+  "FontSize": 8,
+  "FontWeight": 400,
+  "FontItalic": 0,
+  "Controls": [
+    {
+      "Type": "DEFPUSHBUTTON",
+      "Id": 1,
+      "Title": "Ok",
+      "x": 4,
+      "y": 304,
+      "Width": 75,
+      "Height": 28
+    },
+    {
+      "Type": "PUSHBUTTON",
+      "Id": 2,
+      "Title": "Cancel",
+      "x": 83,
+      "y": 304,
+      "Width": 75,
+      "Height": 28
+    },
+    {
+      "Type": "COMBOBOX",
+      "Style": [ "CBS_SORT", "WS_VSCROLL" ],
+      "Id": 1081,
+      "x": 59,
+      "y": 108,
+      "Width": 120,
+      "Height": 62
+    },
+    {
+      "Type": "LTEXT",
+      "Title": "Ench Amount",
+      "x": 359,
+      "y": 304,
+      "Width": 55,
+      "Height": 16
+    },
+    {
+      "Type": "EDITTEXT",
+      "Id": 1085,
+      "Style": [ "ES_RIGHT", "ES_AUTOHSCROLL", "ES_NUMBER" ],
+      "x": 414,
+      "y": 300,
+      "Width": 40,
+      "Height": 24
+    },
+    {
+      "Type": "EDITTEXT",
+      "Id": 1374,
+      "Style": [ "ES_RIGHT", "ES_AUTOHSCROLL", "ES_NUMBER" ],
+      "x": 528,
+      "y": 300,
+      "Width": 40,
+      "Height": 24
+    },
+    {
+      "Type": "AUTOCHECKBUTTON",
+      "Id": 1006,
+      "Title": "Auto-Calc",
+      "x": 187,
+      "y": 302,
+      "Width": 55,
+      "Height": 20
+    },
+    {
+      "Type": "LTEXT",
+      "Title": "Enchantment Cost",
+      "Id": 1670,
+      "x": 458,
+      "y": 304,
+      "Width": 70,
+      "Height": 16
+    },
+    {
+      "Type": "EDITTEXT",
+      "Id": 1060,
+      "Style": [ "ES_AUTOHSCROLL" ],
+      "x": 59,
+      "y": 40,
+      "Width": 120,
+      "Height": 24
+    },
+    {
+      "Type": "RTEXT",
+      "Title": "ID",
+      "x": 4,
+      "y": 16,
+      "Width": 51,
+      "Height": 16
+    },
+    {
+      "Type": "EDITTEXT",
+      "Id": 5500,
+      "Style": [ "ES_AUTOHSCROLL" ],
+      "x": 59,
+      "y": 12,
+      "Width": 120,
+      "Height": 24
+    },
+    {
+      "Type": "RTEXT",
+      "Title": "Casting",
+      "x": 4,
+      "y": 112,
+      "Width": 51,
+      "Height": 16
+    },
+    {
+      "Type": "GROUPBOX",
+      "Title": "Effects",
+      "x": 183,
+      "y": 4,
+      "Width": 389,
+      "Height": 328
+    },
+    {
+      "ExStyle": [ "WS_EX_CLIENTEDGE", "WS_EX_RIGHT" ],
+      "Type": "LISTVIEW",
+      "Id": 2069,
+      "Style": [ "LVS_REPORT", "WS_BORDER" ],
+      "x": 187,
+      "y": 30,
+      "Width": 380,
+      "Height": 264
+    },
+    {
+      "Type": "RTEXT",
+      "Title": "Name",
+      "x": 4,
+      "y": 44,
+      "Width": 51,
+      "Height": 16
+    },
+    {
+      "Type": "AUTOCHECKBUTTON",
+      "Id": 1007,
+      "Title": "Extend Duration on Recast",
+      "Style": [ "BS_LEFTTEXT" ],
+      "x": 59,
+      "y": 254,
+      "Width": 120,
+      "Height": 20
+    },
+    {
+      "Type": "COMBOBOX",
+      "Style": [ "CBS_SORT", "WS_VSCROLL" ],
+      "Id": 2072,
+      "x": 59,
+      "y": 140,
+      "Width": 120,
+      "Height": 95
+    },
+    {
+      "Type": "RTEXT",
+      "Title": "Delivery",
+      "x": 4,
+      "y": 144,
+      "Width": 51,
+      "Height": 16
+    },
+    {
+      "Type": "COMBOBOX",
+      "Style": [ "CBS_SORT", "WS_VSCROLL" ],
+      "Id": 1050,
+      "x": 59,
+      "y": 76,
+      "Width": 120,
+      "Height": 95
+    },
+    {
+      "Type": "RTEXT",
+      "Title": "Type",
+      "x": 4,
+      "y": 80,
+      "Width": 51,
+      "Height": 16
+    },
+    {
+      "Type": "EDITTEXT",
+      "Id": 1296,
+      "Style": [ "ES_AUTOHSCROLL", "ES_RIGHT" ],
+      "x": 315,
+      "y": 300,
+      "Width": 40,
+      "Height": 24
+    },
+    {
+      "Type": "LTEXT",
+      "Title": "Charge Time",
+      "Id": 1672,
+      "x": 260,
+      "y": 304,
+      "Width": 55,
+      "Height": 16
+    },
+    {
+      "Type": "COMBOBOX",
+      "Style": [ "CBS_SORT", "WS_VSCROLL" ],
+      "Id": 2073,
+      "x": 59,
+      "y": 184,
+      "Width": 120,
+      "Height": 62
+    },
+    {
+      "Type": "RTEXT",
+      "Title": "Base Enchantment",
+      "x": 4,
+      "y": 180,
+      "Width": 51,
+      "Height": 36
+    },
+    {
+      "Type": "COMBOBOX",
+      "Style": [ "CBS_SORT", "WS_VSCROLL" ],
+      "Id": 2074,
+      "x": 59,
+      "y": 220,
+      "Width": 120,
+      "Height": 62
+    },
+    {
+      "Type": "RTEXT",
+      "Title": "Worn Restrictions",
+      "x": 4,
+      "y": 216,
+      "Width": 51,
+      "Height": 36
+    }
+  ]
+}

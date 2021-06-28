@@ -52,10 +52,10 @@ VOID FIXAPI Sys_ApplyPatches(VOID)
 		{
 			// To generate .lip files, need creationkit32.exe
 
-			AssertMsg(std::filesystem::exists(std::experimental::filesystem::absolute(L"CreationKit32.exe").c_str()),
+			AssertMsg(std::filesystem::exists(std::filesystem::absolute(L"CreationKit32.exe").c_str()),
 					  "To generate .lip files, need creationkit32.exe")
 
-			ShellExecuteW(NULL, L"open", L"CreationKit32.exe", NULL, std::experimental::filesystem::absolute(L"").c_str(), SW_SHOW);
+			ShellExecuteW(NULL, L"open", L"CreationKit32.exe", NULL, std::filesystem::absolute(L"").c_str(), SW_SHOW);
 			exit(0);
 		}
 		else

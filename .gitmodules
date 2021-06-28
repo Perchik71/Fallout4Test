@@ -11,9 +11,6 @@
 [submodule "Perchik71"]
 	path = Dependencies/mINI
 	url = https://github.com/Perchik71/mINI
-[submodule "Dependencies/json"]
-	path = Dependencies/json
-	url = https://github.com/nlohmann/json.git
 [submodule "Dependencies/tbb"]
 	path = Dependencies/tbb
 	url = https://github.com/oneapi-src/oneTBB.git
@@ -21,3 +18,6 @@
 [submodule "Dependencies/zipper"]
 	path = Dependencies/zipper
 	url = https://github.com/kuba--/zip.git
+[submodule "Dependencies/jDialogs"]
+	path = Dependencies/jDialogs
+	url = https://github.com/Perchik71/jDialogs.git

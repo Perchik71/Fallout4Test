@@ -1,0 +1,244 @@
+{
+  "ExStyle": [ "WS_EX_TOPMOST" ],
+  "Style": [ "DS_SYSMODAL", "DS_CENTER", "WS_SYSMENU", "WS_DLGFRAME", "DS_MODALFRAME", "WS_CAPTION" ],
+  "Title": "Data",
+  "Width": 640,
+  "Height": 800,
+  "FontName": "Microsoft Sans Serif",
+  "FontSize": 8,
+  "FontWeight": 400,
+  "FontItalic": 0,
+  "Controls": [
+    {
+      "Type": "DEFPUSHBUTTON",
+      "Title": "OK",
+      "Id": 1,
+      "x": 432,
+      "y": 768,
+      "Width": 100,
+      "Height": 28
+    },
+    {
+      "Type": "PUSHBUTTON",
+      "Title": "Cancel",
+      "Id": 2,
+      "x": 536,
+      "y": 768,
+      "Width": 100,
+      "Height": 28
+    },
+    {
+      "Type": "PUSHBUTTON",
+      "Id": 1121,
+      "Title": "Set as Active File",
+      "x": 4,
+      "y": 768,
+      "Width": 100,
+      "Height": 28
+    },
+    {
+      "Type": "PUSHBUTTON",
+      "Id": 1185,
+      "Title": "Details...",
+      "x": 184,
+      "y": 768,
+      "Width": 100,
+      "Height": 28
+    },
+    {
+      "ExStyle": [ "WS_EX_CLIENTEDGE" ],
+      "Type": "LISTVIEW",
+      "Title": "List1",
+      "Id": 1056,
+      "Style": [ "LVS_REPORT", "LVS_SHOWSELALWAYS", "WS_BORDER" ],
+      "x": 4,
+      "y": 72,
+      "Width": 280,
+      "Height": 692
+    },
+    {
+      "Type": "EDITTEXT",
+      "Style": [ "ES_AUTOHSCROLL" ],
+      "Id": 1025,
+      "Title": "",
+      "x": 288,
+      "y": 24,
+      "Width": 186,
+      "Height": 24
+    },
+    {
+      "Type": "EDITTEXT",
+      "Style": [ "ES_MULTILINE", "ES_AUTOVSCROLL", "ES_WANTRETURN" ],
+      "Id": 1024,
+      "Title": "",
+      "x": 288,
+      "y": 72,
+      "Width": 186,
+      "Height": 652
+    },
+    {
+      "ExStyle": [ "WS_EX_CLIENTEDGE" ],
+      "Type": "LISTVIEW",
+      "Title": "",
+      "Id": 1057,
+      "Style": [ "LVS_REPORT", "LVS_SINGLESEL", "LVS_SHOWSELALWAYS", "LVS_NOSORTHEADER", "WS_BORDER" ],
+      "x": 478,
+      "y": 24,
+      "Width": 158,
+      "Height": 700
+    },
+    {
+      "Type": "LTEXT",
+      "Title": "Plugin/Master Files",
+      "x": 14,
+      "y": 52,
+      "Width": 100,
+      "Height": 16
+    },
+    {
+      "Type": "LTEXT",
+      "Title": "Created By",
+      "x": 298,
+      "y": 4,
+      "Width": 60,
+      "Height": 16
+    },
+    {
+      "Type": "LTEXT",
+      "Title": "Summary",
+      "x": 298,
+      "y": 52,
+      "Width": 60,
+      "Height": 16
+    },
+    {
+      "Type": "LTEXT",
+      "Title": "Parent Masters",
+      "x": 488,
+      "y": 4,
+      "Width": 80,
+      "Height": 16
+    },
+    {
+      "Type": "LTEXT",
+      "Title": "Created On:",
+      "x": 288,
+      "y": 728,
+      "Width": 75,
+      "Height": 16
+    },
+    {
+      "Type": "LTEXT",
+      "Title": "Last Modified:",
+      "x": 288,
+      "y": 748,
+      "Width": 75,
+      "Height": 16
+    },
+    {
+      "Type": "LTEXT",
+      "Title": "(Unknown)",
+      "Id": 1026,
+      "x": 542,
+      "y": 728,
+      "Width": 45,
+      "Height": 16
+    },
+    {
+      "Type": "LTEXT",
+      "Title": "(Unknown)",
+      "Id": 1027,
+      "x": 542,
+      "y": 748,
+      "Width": 45,
+      "Height": 16
+    },
+    {
+      "Type": "RTEXT",
+      "Title": "File Version:",
+      "Style": [ "NOT WS_VISIBLE" ],
+      "Id": 2406,
+      "x": 512,
+      "y": 728,
+      "Width": 75,
+      "Height": 16
+    },
+    {
+      "Type": "RTEXT",
+      "Title": "Current:",
+      "Style": [ "NOT WS_VISIBLE" ],
+      "Id": 2407,
+      "x": 512,
+      "y": 748,
+      "Width": 75,
+      "Height": 16
+    },
+    {
+      "Type": "LTEXT",
+      "Title": "(Unknown)",
+      "Style": [ "NOT WS_VISIBLE" ],
+      "Id": 1681,
+      "x": 591,
+      "y": 728,
+      "Width": 45,
+      "Height": 16
+    },
+    {
+      "Type": "LTEXT",
+      "Title": "(Unknown)",
+      "Style": [ "NOT WS_VISIBLE" ],
+      "Id": 1682,
+      "x": 591,
+      "y": 748,
+      "Width": 45,
+      "Height": 16
+    },
+    {
+      "Type": "RTEXT",
+      "Title": "(Unknown)",
+      "Id": 1028,
+      "x": 591,
+      "y": 728,
+      "Width": 45,
+      "Height": 16
+    },
+    {
+      "Type": "RTEXT",
+      "Title": "(Unknown)",
+      "Id": 1029,
+      "x": 591,
+      "y": 748,
+      "Width": 45,
+      "Height": 16
+    },
+    {
+      "Type": "EDITTEXT",
+      "Style": [ "ES_AUTOHSCROLL" ],
+      "Id": 52004,
+      "Title": "",
+      "x": 4,
+      "y": 24,
+      "Width": 280,
+      "Height": 24
+    },
+    {
+      "Type": "LTEXT",
+      "Title": "Search",
+      "x": 14,
+      "y": 4,
+      "Width": 45,
+      "Height": 16
+    },
+    {
+      "ExStyle": [ "WS_EX_CLIENTEDGE" ],
+      "Type": "LISTVIEW",
+      "Title": "",
+      "Id": 52005,
+      "Style": [ "LVS_REPORT", "LVS_SHOWSELALWAYS", "WS_BORDER", "NOT WS_VISIBLE" ],
+      "x": 4,
+      "y": 72,
+      "Width": 280,
+      "Height": 692
+    }
+  ]
+}

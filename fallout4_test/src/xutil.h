@@ -165,6 +165,15 @@ namespace XUtil
 
 		size_t findCaseInsensitive(std::string data, std::string toSearch, size_t pos = 0);
 
+		// dirnameOf https://stackoverflow.com/questions/8518743/get-directory-from-file-path-c/34740989
+		static inline std::string dirnameOf(const std::string& fname)
+		{
+			size_t pos = fname.find_last_of("\\/");
+			return (std::string::npos == pos)
+				? ""
+				: fname.substr(0, pos);
+		}
+
 		// trim https://stackoverflow.com/questions/216823/whats-the-best-way-to-trim-stdstring
 
 		// trim from start (in place)

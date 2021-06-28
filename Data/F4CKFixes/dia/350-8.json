@@ -1,0 +1,319 @@
+{
+  "ExStyle": [ "WS_EX_COMPOSITED" ],
+  "Style": [ "WS_SYSMENU", "WS_DLGFRAME", "DS_MODALFRAME", "WS_CAPTION" ],
+  "Title": "Show/Hide",
+  "Width": 116,
+  "Height": 732,
+  "FontName": "Microsoft Sans Serif",
+  "FontSize": 8,
+  "FontWeight": 400,
+  "FontItalic": 0,
+  "Controls": [
+    {
+      "Type": "AUTOCHECKBUTTON",
+      "Id": 1007,
+      "Title": "Markers",
+      "Style": [ "NOT WS_GROUP" ],
+      "x": 8,
+      "y": 4,
+      "Width": 40,
+      "Height": 20
+    },
+    {
+      "Type": "GROUPBOX",
+      "Style": [ "NOT WS_GROUP" ],
+      "x": 4,
+      "y": 4,
+      "Width": 108,
+      "Height": 268
+    },
+    {
+      "Type": "AUTOCHECKBUTTON",
+      "Id": 1006,
+      "Title": "Light Markers",
+      "Style": [ "NOT WS_GROUP" ],
+      "x": 12,
+      "y": 28,
+      "Width": 90,
+      "Height": 20
+    },
+    {
+      "Type": "AUTOCHECKBUTTON",
+      "Id": 1013,
+      "Title": "Sound Markers",
+      "Style": [ "NOT WS_GROUP" ],
+      "x": 12,
+      "y": 52,
+      "Width": 90,
+      "Height": 20
+    },
+    {
+      "Type": "AUTOCHECKBUTTON",
+      "Id": 1019,
+      "Title": "Multibounds",
+      "Style": [ "NOT WS_GROUP" ],
+      "x": 12,
+      "y": 76,
+      "Width": 90,
+      "Height": 20
+    },
+    {
+      "Type": "AUTOCHECKBUTTON",
+      "Id": 1021,
+      "Title": "Occlusion Planes",
+      "Style": [ "NOT WS_GROUP" ],
+      "x": 12,
+      "y": 100,
+      "Width": 90,
+      "Height": 20
+    },
+    {
+      "Type": "AUTOCHECKBUTTON",
+      "Id": 1022,
+      "Title": "Portals and Rooms",
+      "Style": [ "NOT WS_GROUP" ],
+      "x": 12,
+      "y": 124,
+      "Width": 90,
+      "Height": 20
+    },
+    {
+      "Type": "AUTOCHECKBUTTON",
+      "Id": 5100,
+      "Title": "Collision Objects",
+      "Style": [ "NOT WS_GROUP" ],
+      "x": 12,
+      "y": 148,
+      "Width": 90,
+      "Height": 20
+    },
+    {
+      "Type": "AUTOCHECKBUTTON",
+      "Id": 1024,
+      "Title": "LOD Clip Volumes",
+      "Style": [ "NOT WS_GROUP" ],
+      "x": 12,
+      "y": 172,
+      "Width": 90,
+      "Height": 20
+    },
+    {
+      "Type": "AUTOCHECKBUTTON",
+      "Id": 1025,
+      "Title": "Rarity Indicators",
+      "Style": [ "NOT WS_GROUP" ],
+      "x": 12,
+      "y": 196,
+      "Width": 90,
+      "Height": 20
+    },
+    {
+      "Type": "AUTOCHECKBUTTON",
+      "Id": 1029,
+      "Title": "Spline Markers",
+      "Style": [ "NOT WS_GROUP" ],
+      "x": 12,
+      "y": 220,
+      "Width": 90,
+      "Height": 20
+    },
+    {
+      "Type": "AUTOCHECKBUTTON",
+      "Id": 1030,
+      "Title": "Misc Markers",
+      "Style": [ "NOT WS_GROUP" ],
+      "x": 12,
+      "y": 244,
+      "Width": 90,
+      "Height": 20
+    },
+    {
+      "Type": "AUTOCHECKBUTTON",
+      "Id": 1200,
+      "Title": "Links",
+      "Style": [ "NOT WS_GROUP" ],
+      "x": 8,
+      "y": 272,
+      "Width": 30,
+      "Height": 20
+    },
+    {
+      "Type": "GROUPBOX",
+      "Style": [ "NOT WS_GROUP" ],
+      "x": 4,
+      "y": 272,
+      "Width": 108,
+      "Height": 148
+    },
+    {
+      "Type": "AUTOCHECKBUTTON",
+      "Id": 1201,
+      "Title": "Activate Parents",
+      "Style": [ "NOT WS_GROUP" ],
+      "x": 12,
+      "y": 296,
+      "Width": 90,
+      "Height": 20
+    },
+    {
+      "Type": "AUTOCHECKBUTTON",
+      "Id": 1202,
+      "Title": "Enable Parents",
+      "Style": [ "NOT WS_GROUP" ],
+      "x": 12,
+      "y": 320,
+      "Width": 90,
+      "Height": 20
+    },
+    {
+      "Type": "AUTOCHECKBUTTON",
+      "Id": 1203,
+      "Title": "Linked References",
+      "Style": [ "NOT WS_GROUP" ],
+      "x": 12,
+      "y": 344,
+      "Width": 90,
+      "Height": 20
+    },
+    {
+      "Type": "AUTOCHECKBUTTON",
+      "Id": 1204,
+      "Title": "Room Links",
+      "Style": [ "NOT WS_GROUP" ],
+      "x": 12,
+      "y": 368,
+      "Width": 90,
+      "Height": 20
+    },
+    {
+      "Type": "AUTOCHECKBUTTON",
+      "Id": 1205,
+      "Title": "Attach Ref Links",
+      "Style": [ "NOT WS_GROUP" ],
+      "x": 12,
+      "y": 392,
+      "Width": 90,
+      "Height": 20
+    },
+    {
+      "Type": "AUTOCHECKBUTTON",
+      "Id": 1008,
+      "Title": "Helper Objects",
+      "Style": [ "WS_DISABLED", "NOT WS_GROUP" ],
+      "x": 8,
+      "y": 424,
+      "Width": 94,
+      "Height": 20
+    },
+    {
+      "Type": "AUTOCHECKBUTTON",
+      "Id": 1009,
+      "Title": "Activators",
+      "Style": [ "WS_DISABLED", "NOT WS_GROUP" ],
+      "x": 8,
+      "y": 448,
+      "Width": 94,
+      "Height": 20
+    },
+    {
+      "Type": "AUTOCHECKBUTTON",
+      "Id": 1010,
+      "Title": "Doors",
+      "Style": [ "WS_DISABLED", "NOT WS_GROUP" ],
+      "x": 8,
+      "y": 472,
+      "Width": 94,
+      "Height": 20
+    },
+    {
+      "Type": "AUTOCHECKBUTTON",
+      "Id": 1011,
+      "Title": "Terrain",
+      "Style": [ "NOT WS_GROUP" ],
+      "x": 8,
+      "y": 496,
+      "Width": 90,
+      "Height": 20
+    },
+    {
+      "Type": "AUTOCHECKBUTTON",
+      "Id": 4032,
+      "Title": "Statics",
+      "Style": [ "NOT WS_GROUP" ],
+      "x": 8,
+      "y": 520,
+      "Width": 90,
+      "Height": 20
+    },
+    {
+      "Type": "AUTOCHECKBUTTON",
+      "Id": 1018,
+      "Title": "Actors",
+      "Style": [ "NOT WS_GROUP" ],
+      "x": 8,
+      "y": 544,
+      "Width": 90,
+      "Height": 20
+    },
+    {
+      "Type": "AUTOCHECKBUTTON",
+      "Id": 1020,
+      "Title": "Dynamics",
+      "Style": [ "NOT WS_GROUP" ],
+      "x": 8,
+      "y": 568,
+      "Width": 90,
+      "Height": 20
+    },
+    {
+      "Type": "AUTOCHECKBUTTON",
+      "Id": 1023,
+      "Title": "Decals",
+      "Style": [ "NOT WS_GROUP" ],
+      "x": 8,
+      "y": 592,
+      "Width": 90,
+      "Height": 20
+    },
+    {
+      "Type": "AUTOCHECKBUTTON",
+      "Id": 1026,
+      "Title": "Objects Hidden From Local Map",
+      "Style": [ "BS_MULTILINE", "NOT WS_GROUP" ],
+      "x": 8,
+      "y": 616,
+      "Width": 90,
+      "Height": 40
+    },
+    {
+      "Type": "AUTOCHECKBUTTON",
+      "Id": 1027,
+      "Title": "HiRes Heightfield",
+      "Style": [ "NOT WS_GROUP" ],
+      "x": 8,
+      "y": 660,
+      "Width": 90,
+      "Height": 20
+    },
+    {
+      "Type": "AUTOCHECKBUTTON",
+      "Id": 1028,
+      "Title": "Ground Pieces",
+      "Style": [ "NOT WS_GROUP" ],
+      "x": 8,
+      "y": 684,
+      "Width": 90,
+      "Height": 20
+    },
+    {
+      "Type": "AUTOCHECKBUTTON",
+      "Id": 1012,
+      "Title": "Water",
+      "Style": [ "NOT WS_GROUP" ],
+      "x": 8,
+      "y": 708,
+      "Width": 90,
+      "Height": 20
+    }
+  ]
+}

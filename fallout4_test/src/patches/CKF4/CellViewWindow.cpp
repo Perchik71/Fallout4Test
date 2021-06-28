@@ -148,7 +148,7 @@ namespace CellViewWindow
 			if (lParam)
 			{
 				LPMINMAXINFO lpMMI = (LPMINMAXINFO)lParam;
-				lpMMI->ptMinTrackSize.x = 700;
+				lpMMI->ptMinTrackSize.x = 738;
 				lpMMI->ptMinTrackSize.y = 315;
 			}
 

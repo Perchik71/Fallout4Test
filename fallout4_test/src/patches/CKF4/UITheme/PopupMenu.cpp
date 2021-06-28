@@ -265,7 +265,7 @@ namespace Core
 							std::string text = menuItem.Text;
 
 							Graphics::CUICanvas canvas = GetDC(hWindow);
-							canvas.Font.Assign(Core::UI::Theme::ThemeFont);
+							canvas.Font.Assign(*Core::UI::Theme::ThemeFont);
 
 							INT width, height;
 							UINT nEdgeWidth = GetSystemMetrics(SM_CXEDGE);
@@ -287,7 +287,7 @@ namespace Core
 						if (!menuItem.IsSeparate())
 						{
 							SetBkMode(lpDrawItem->hDC, TRANSPARENT);
-							canvas.Font.Assign(Core::UI::Theme::ThemeFont);
+							canvas.Font.Assign(*Core::UI::Theme::ThemeFont);
 							COLORREF clrPrevText;
 
 							BOOL bDisabled = (lpDrawItem->itemState & ODS_DISABLED) == ODS_DISABLED;

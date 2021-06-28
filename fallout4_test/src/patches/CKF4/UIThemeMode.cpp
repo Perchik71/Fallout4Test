@@ -103,7 +103,22 @@ namespace UITheme
 
 		// I will new it once and forget about its existence
 		// I have no general idea where to destroy it. Yes, and it is not necessary, it will die along with the process.
-		listFont = new Classes::CUIFont("Microsoft Sans Serif", 8, {}, g_INI.GetInteger("Font", "Charset", DEFAULT_CHARSET));
+		
+		switch (g_i8DialogMode)
+		{
+	/*	case 2:
+			listFont = new Classes::CUIFont("Microsoft Sans Serif", 9, {}, g_INI.GetInteger("Font", "Charset", DEFAULT_CHARSET), Core::Classes::UI::fqClearTypeNatural, Core::Classes::UI::fpVariable);
+			Theme::ThemeFont = new Classes::CUIFont("Microsoft Sans Serif", 9, {}, DEFAULT_CHARSET, Core::Classes::UI::fqClearTypeNatural, Core::Classes::UI::fpVariable);
+			break;*/
+		case 3:
+			listFont = new Classes::CUIFont("Microsoft Sans Serif", 10, {}, g_INI.GetInteger("Font", "Charset", DEFAULT_CHARSET), Core::Classes::UI::fqClearTypeNatural, Core::Classes::UI::fpVariable);
+			Theme::ThemeFont = new Classes::CUIFont("Microsoft Sans Serif", 10, {}, DEFAULT_CHARSET, Core::Classes::UI::fqClearTypeNatural, Core::Classes::UI::fpVariable);
+			break;
+		default:
+			listFont = new Classes::CUIFont("Microsoft Sans Serif", 8, {}, g_INI.GetInteger("Font", "Charset", DEFAULT_CHARSET), Core::Classes::UI::fqClearTypeNatural, Core::Classes::UI::fpVariable);
+			Theme::ThemeFont = new Classes::CUIFont("Microsoft Sans Serif", 8, {}, DEFAULT_CHARSET, Core::Classes::UI::fqClearTypeNatural, Core::Classes::UI::fpVariable);
+			break;
+	    }
 
 #if THEME_DEBUG
 		ofs.open("__theme_debug.log");
@@ -365,7 +380,8 @@ namespace UITheme
 				}
 				break;
 			case ThemeType::Edit:
-				if (((uStyles & WS_VSCROLL) == WS_VSCROLL) && ((uStyles & WS_HSCROLL) == WS_HSCROLL))
+				if (((uStyles & ES_MULTILINE) == ES_MULTILINE) && 
+					(((uStyles & WS_VSCROLL) == WS_VSCROLL) || ((uStyles & WS_HSCROLL) == WS_HSCROLL)))
 					// this memo control
 					scrollBarTheme = Theme::Memo::Initialize(hWnd);
 				break;
@@ -552,7 +568,7 @@ namespace UITheme
 	{
 		Classes::CUICanvas Canvas(hdc);
 		Canvas.TransparentMode = TRUE;
-		Canvas.Font.Assign(Theme::ThemeFont);
+		Canvas.Font.Assign(*Theme::ThemeFont);
 
 		if ((Theme::GetTheme() == Theme::Theme_Dark) || (Theme::GetTheme() == Theme::Theme_DarkGray))
 		{

@@ -9,7 +9,7 @@ namespace Core
 	{
 		namespace Theme
 		{
-			extern const Core::Classes::UI::CUIFont ThemeFont;
+			extern Core::Classes::UI::CUIFont* ThemeFont;
 
 			extern HBRUSH hThemeDefaultBrush;
 			extern HBRUSH hThemeText3Brush;

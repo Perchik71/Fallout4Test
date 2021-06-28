@@ -1,0 +1,22 @@
+{
+  "Style": [ "DS_CENTER", "DS_ABSALIGN", "WS_POPUP" ],
+  "Title": "",
+  "Width": 660,
+  "Height": 520,
+  "FontName": "Microsoft Sans Serif",
+  "FontSize": 10,
+  "FontWeight": 400,
+  "FontItalic": 0,
+  "Controls": [
+    {
+      "Type": "BITMAP",
+      "Style": [ "SS_REALSIZEIMAGE" ],
+      "Id": 1962,
+      "Title": "320",
+      "x": 0,
+      "y": 0,
+      "Width": 640,
+      "Height": 480
+    }
+  ]
+}

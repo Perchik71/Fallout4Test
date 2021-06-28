@@ -26,7 +26,7 @@
 #include "CKF4/PreferencesWindow.h"
 
 // include json generator dialogs
-#include "CKF4/JsonDialogGenerator.h"
+#include "CKF4/UIDialogManager.h"
 
 
 #include <xbyak/xbyak.h>
@@ -73,7 +73,7 @@ VOID FIXAPI F_RequiredPatches(VOID)
 	XUtil::DetourJump(OFFSET(0x2004300, 0), &MemoryManager::Size);
 	XUtil::DetourJump(OFFSET(0x200AB30, 0), &ScrapHeap::Allocate);
 	XUtil::DetourJump(OFFSET(0x200B170, 0), &ScrapHeap::Deallocate);
-
+	
 	PatchIAT(hk_CreateDialogParamA, "USER32.DLL", "CreateDialogParamA");
 	PatchIAT(hk_DialogBoxParamA, "USER32.DLL", "DialogBoxParamA");
 	PatchIAT(hk_EndDialog, "USER32.DLL", "EndDialog");
@@ -248,8 +248,7 @@ Patches for the UI
 */
 VOID FIXAPI F_UIPatches(VOID)
 {
-	BOOL enable = (BOOL)g_INI.GetBoolean("CreationKit", "UI", FALSE);
-	if (!enable)
+	if (!g_UIEnabled)
 		return;
 
 	auto comDll = (uintptr_t)GetModuleHandleA("comctl32.dll");
@@ -272,6 +271,21 @@ VOID FIXAPI F_UIPatches(VOID)
 		XUtil::DetourCall(OFFSET(0x5B63E7, 0), UITheme::Comctl32ImageList_LoadImageA_1);
 		// Sync TimeOfDay set value (from Preferences dialogs)
 		XUtil::DetourCall(OFFSET(0x5ED96A, 0), PreferencesWindow::hk_SetInPreferencesToTimeOfDay);
+
+		// Initializing the dialog manager. 
+		// Loading all supported dialogs.
+		g_DialogManager = new Classes::CDialogManager();
+		if (g_DialogManager && g_DialogManager->Empty())
+		{
+			LogWindow::Log("DIALOG: Failed initialization DialogManager or no dialogs detected");
+			delete g_DialogManager;
+			g_DialogManager = NULL;
+		}
+		else
+		{
+			// Let's increase the "Filename" column in the Data dialog.
+			XUtil::PatchMemory(OFFSET(0x5A520A, 0), { 0x2C, 0x01 });
+		}
 	}
 
 	EditorUI::Initialize();
@@ -354,7 +368,7 @@ VOID FIXAPI F_UIPatches(VOID)
 	// Replacing the Tips window "Do you know...". Which appears when the plugin is loaded. (no support cmd line)
 	//
 
-	if (enable = (BOOL)g_INI.GetBoolean("CreationKit", "ReplacingTipsWithProgressBar", FALSE); enable)
+	if (BOOL enable = (BOOL)g_INI.GetBoolean("CreationKit", "ReplacingTipsWithProgressBar", FALSE); enable)
 	{
 		if (nCountArgCmdLine == 1)
 		{
@@ -386,10 +400,6 @@ VOID FIXAPI F_UIPatches(VOID)
 			XUtil::DetourClassJump(OFFSET(0xE1D2C7, 0), &Classes::CUIProgressDialog::ProcessMessagesOnlyLoadCellWorld);
 		}
 	}
-
-	// Initializing the dialog manager. 
-	// Loading all supported dialogs.
-	//Classes::g_JsonDialogManager = new Classes::CJsonDialogManager();
 }
 
 
@@ -503,6 +513,9 @@ VOID FIXAPI MainFix_PatchFallout4CreationKit(VOID)
 		MessageBoxA(NULL, message, "Version Check", MB_ICONERROR);
 		return;
 	}
+
+	g_UIEnabled = (bool)g_INI.GetBoolean("CreationKit", "UI", false);
+	g_i8DialogMode = (int8_t)g_INI.GetInteger("CreationKit", "DialogMode", 0);
 
 	//
 	// Replace broken crash dump functionality

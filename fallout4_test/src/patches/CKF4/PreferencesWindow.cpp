@@ -55,15 +55,15 @@ namespace PreferencesWindow
 		else if (Message == WM_NCACTIVATE && (!wParam))
 		{
 			SetNewValueTimeOfDay();
-			PreferencesWindow.Perform(WM_CLOSE, 0, 0);
-			PreferencesWindow = NULL;
-
-			return S_OK;
 		}
 		else if (Message == WM_COMMAND)
 		{
 			if (LOWORD(wParam) == 0x5C5)
 				SetNewValueTimeOfDay();
+		}
+		else if (WM_CLOSE == Message)
+		{
+			PreferencesWindow = NULL;
 		}
 
 		return OldDlgProc(DialogHwnd, Message, wParam, lParam);

@@ -60,6 +60,9 @@ extern uintptr_t g_RdataEnd;
 extern uintptr_t g_DataBase;	// .data
 extern uintptr_t g_DataEnd;
 
+extern bool g_UIEnabled;
+extern int8_t g_i8DialogMode;
+
 enum class GAME_EXECUTABLE_TYPE
 {
 	UNKNOWN,
